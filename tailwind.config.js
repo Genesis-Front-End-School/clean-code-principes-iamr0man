@@ -5,7 +5,7 @@ module.exports = {
     screens: {
       tablet: { max: '1280px' },
       mobile: { max: '1000px' },
-    }
+    },
   },
   plugins: [],
 };

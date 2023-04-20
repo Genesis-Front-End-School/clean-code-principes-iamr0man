@@ -6,19 +6,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import NotFound from "@/components/error/NotFound.vue";
+import { defineComponent } from 'vue';
+import NotFound from '@/components/error/NotFound.vue';
 
 export default defineComponent({
-  name: "ErrorBoundary",
+  name: 'ErrorBoundary',
   components: {
-    NotFound
+    NotFound,
   },
   data: () => ({
-    error: false
+    error: false,
   }),
-  errorCaptured () {
-    this.error = true
-  }
-})
+  errorCaptured() {
+    this.error = true;
+  },
+});
 </script>

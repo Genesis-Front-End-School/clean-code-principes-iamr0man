@@ -18,16 +18,16 @@
 </template>
 
 <script lang="ts">
-import { RouterView } from "vue-router";
-import { defineComponent } from "vue";
-import ErrorBoundary from "@/components/error/ErrorBoundary.vue";
+import { RouterView } from 'vue-router';
+import { defineComponent } from 'vue';
+import ErrorBoundary from '@/components/error/ErrorBoundary.vue';
 
 export default defineComponent({
   components: {
     RouterView,
     ErrorBoundary,
-  }
-})
+  },
+});
 </script>
 
 <style>

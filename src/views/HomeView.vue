@@ -1,6 +1,8 @@
 <template>
   <Container class="flex flex-col justify-center items-center">
-    <div class="grid grid-cols-3 gap-y-12 gap-x-12 tablet:grid-cols-2 mobile:grid-cols-1 mobile:gap-x-0">
+    <div
+      class="grid grid-cols-3 gap-y-12 gap-x-12 tablet:grid-cols-2 mobile:grid-cols-1 mobile:gap-x-0"
+    >
       <CourseItem
         v-for="course in paginatedCourses"
         :key="course.id"
@@ -19,38 +21,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import CourseItem from "@/components/courses/CourseItem.vue";
-import { getCourses } from "@/database/courses.gateway";
-import Container from "@/components/ui/Container.vue";
+import { defineComponent } from 'vue';
+import CourseItem from '@/components/courses/CourseItem.vue';
+import { getCourses } from '@/database/courses.gateway';
+import Container from '@/components/ui/Container.vue';
 
-const MAX_ITEM_PER_LOAD = 6
+const MAX_ITEM_PER_LOAD = 6;
 
 export default defineComponent({
-  components: {Container, CourseItem },
-  async setup () {
-    const courses = await getCourses()
+  components: { Container, CourseItem },
+  async setup() {
+    const courses = await getCourses();
 
     return {
-      courses
-    }
+      courses,
+    };
   },
   data: () => ({
-    page: 1
+    page: 1,
   }),
   computed: {
-    paginatedCourses () {
-      return this.courses.slice(0, this.page * MAX_ITEM_PER_LOAD)
+    paginatedCourses() {
+      return this.courses.slice(0, this.page * MAX_ITEM_PER_LOAD);
     },
-    loadDisabled () {
-      return this.paginatedCourses.length === this.courses.length
-    }
+    loadDisabled() {
+      return this.paginatedCourses.length === this.courses.length;
+    },
   },
   methods: {
-    incrementPage () {
-      this.page += 1
-    }
-  }
- })
+    incrementPage() {
+      this.page += 1;
+    },
+  },
+});
 </script>
-

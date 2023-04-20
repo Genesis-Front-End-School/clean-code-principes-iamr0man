@@ -86,6 +86,9 @@ export default defineComponent({
     videoRefName: 'selected-video'
   }),
   computed: {
+		isAvailable () {
+			return this.unlocked || !this.notFound
+    },
     lessons () {
       return this.course.lessons.sort((a, b) => a.order - b.order)
     },
@@ -102,7 +105,7 @@ export default defineComponent({
       return `${this.course.id}-selected-lesson`
     },
     tabbingIndex () {
-      return !this.unlocked || this.notFound ? -1 : 0
+      return !this.isAvailable ? -1 : 0
     },
   },
   watch: {
@@ -115,7 +118,7 @@ export default defineComponent({
     speed (newValue: number) {
       this.speedChanged = true
 
-      const video = this.$refs['selected-video'] as HTMLMediaElement;
+      const video = this.$refs[this.videoRefName] as HTMLMediaElement;
       video.playbackRate = newValue;
 
       setTimeout(() => this.speedChanged = false, 400)
@@ -135,7 +138,7 @@ export default defineComponent({
       if (document.pictureInPictureElement) {
         document.exitPictureInPicture();
       } else if (document.pictureInPictureEnabled) {
-        const video = this.$refs['selected-video'] as HTMLVideoElement;
+        const video = this.$refs[this.videoRefName] as HTMLVideoElement;
         video.requestPictureInPicture();
       }
     },
@@ -178,32 +181,41 @@ export default defineComponent({
     loadHlsPlayer () {
       const video = this.$refs[this.videoRefName] as HTMLMediaElement;
 
-      video.addEventListener('timeupdate', () => {
-        let currentTime = JSON.stringify(video.currentTime)
-        if (!Number(currentTime)) {
-          return
-        }
-        localStorage.setItem(this.currentLesson.id + DURATION_TIME_KEY, currentTime);
-      });
+	    this.initVideoListener(video)
 
-      if ((!this.unlocked || this.notFound)) {
-        this.hls.destroy()
-        this.hls = new Hls()
-        return
+			if (!this.isAvailable) {
+				this.resetVideoPlayer()
+        return;
       }
 
       try {
         if (Hls.isSupported()) {
-          this.hls.loadSource(this.currentLesson.link);
-          this.hls.attachMedia(video);
-          this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            video.currentTime = this.checkCurrentTime();
-          });
+          this.setHlsSourceAndListener(video)
           return;
         }
       } catch (err) {
         this.notFound = true
       }
+    },
+	  initVideoListener (video: HTMLMediaElement) {
+		  video.addEventListener('timeupdate', () => {
+			  let currentTime = JSON.stringify(video.currentTime)
+			  if (!Number(currentTime)) {
+				  return
+			  }
+			  localStorage.setItem(this.currentLesson.id + DURATION_TIME_KEY, currentTime);
+		  });
+	  },
+	  resetVideoPlayer () {
+		  this.hls.destroy()
+		  this.hls = new Hls()
+	  },
+	  setHlsSourceAndListener(video: HTMLMediaElement) {
+	    this.hls.loadSource(this.currentLesson.link);
+	    this.hls.attachMedia(video);
+	    this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+		    video.currentTime = this.checkCurrentTime();
+	    });
     }
   }
 })

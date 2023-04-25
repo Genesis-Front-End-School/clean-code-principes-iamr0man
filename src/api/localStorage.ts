@@ -1,12 +1,4 @@
-import { axios } from '@/utils/axios';
-import { IAuth } from '@/api/auth.types';
-
-export async function signIn() {
-  const { data } = await axios.get<IAuth.Response>(
-    '/auth/anonymous?platform=subscriptions',
-  );
-  return data.token;
-}
+import { IAuth } from '@/api/localStorage.types';
 
 export function setLocalAccessToken(token: string) {
   return window.localStorage.setItem(IAuth.Enum.Token.AccessToken, token);

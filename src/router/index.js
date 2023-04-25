@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import Course from '@/views/CourseView.vue';
 import PageNotFound from '@/views/PageNotFoundView.vue';
-import { getLocalAccessToken, setLocalAccessToken, signIn } from '@/api/auth';
+import { getLocalAccessToken, setLocalAccessToken } from '@/api/localStorage';
+import { api } from '@/api/api';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,8 +27,11 @@ router.beforeEach(async (to, from, next) => {
   const loggedIn = getLocalAccessToken();
 
   if (!loggedIn) {
-    const token = await signIn();
-    setLocalAccessToken(token);
+    const data = await api.signIn();
+
+    if (data.isSuccess) {
+      setLocalAccessToken(data.response.token);
+    }
   }
   next();
 });

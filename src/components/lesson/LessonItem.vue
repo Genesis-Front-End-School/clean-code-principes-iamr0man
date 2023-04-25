@@ -20,7 +20,7 @@ export default defineComponent({
   name: "LessonItem",
   props: {
     lesson: {
-      type: Object as PropType<ICourse.Lesson>,
+      type: Object as PropType<ICourse.Lessons>,
       required: true
     },
     selected: {

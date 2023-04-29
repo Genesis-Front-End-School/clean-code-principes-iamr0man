@@ -1,22 +1,18 @@
 <template>
   <Container class="flex flex-col justify-center items-center">
     <div
-      class="grid grid-cols-3 gap-y-12 gap-x-12 tablet:grid-cols-2 mobile:grid-cols-1 mobile:gap-x-0"
-    >
+      class="grid grid-cols-3 gap-y-12 gap-x-12 tablet:grid-cols-2 mobile:grid-cols-1 mobile:gap-x-0">
       <CourseItem
         v-for="course in paginatedCourses"
         :key="course.id"
-        :course="course"
-      />
+        :course="course" />
     </div>
-    <button
-      v-if="!loadDisabled"
-      type="button"
-      class="mt-4 text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-      @click="incrementPage"
-    >
-      Load more
-    </button>
+    <ThePagination
+      class="mt-2"
+      v-model="page"
+      :per-page="3"
+      :total-items="courses.length"
+      :slice-length="2" />
   </Container>
 </template>
 
@@ -24,17 +20,18 @@
 import { defineComponent } from 'vue';
 import CourseItem from '@/components/courses/CourseItem.vue';
 import Container from '@/components/ui/Container.vue';
-import { api } from "@/api/api";
+import { api } from '@/api/api';
+import ThePagination from '@/components/ui/ThePagination/ThePagination.vue';
 
-const MAX_ITEM_PER_LOAD = 6;
+const MAX_ITEM_PER_LOAD = 3;
 
 export default defineComponent({
-  components: { Container, CourseItem },
+  components: { ThePagination, Container, CourseItem },
   async setup() {
     const data = await api.getCourses();
 
-		if (data.isSuccess) {
-			return data.response;
+    if (data.isSuccess) {
+      return data.response;
     }
 
     return {
@@ -46,15 +43,10 @@ export default defineComponent({
   }),
   computed: {
     paginatedCourses() {
-      return this.courses.slice(0, this.page * MAX_ITEM_PER_LOAD);
-    },
-    loadDisabled() {
-      return this.paginatedCourses.length === this.courses.length;
-    },
-  },
-  methods: {
-    incrementPage() {
-      this.page += 1;
+      return this.courses.slice(
+        (this.page - 1) * MAX_ITEM_PER_LOAD,
+        this.page * MAX_ITEM_PER_LOAD,
+      );
     },
   },
 });

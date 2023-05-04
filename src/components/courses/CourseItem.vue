@@ -1,6 +1,6 @@
 <template>
   <RouterLink
-    id="courseId"
+    :id="course.id"
     :to="course.id"
     class="border bg-opacity-50 rounded-lg shadow dark:border-gray-700"
     @mouseleave="stopVideo"

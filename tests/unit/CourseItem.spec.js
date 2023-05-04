@@ -1,39 +1,45 @@
 import { mount } from '@vue/test-utils';
-import { nextTick } from 'vue';
 import course from './course'
 
 import CourseItem from '@/components/courses/CourseItem.vue';
-import PlaybackSpeedLayer from '@/components/lesson/VideoLayers/PlaybackSpeedLayer.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [],
+})
+
 describe('Course Item', () => {
   it('should play video if tag video exists', () => {
     const wrapper = mount(CourseItem, {
       props: {
         course
-      },
+      }
     });
 
     expect(wrapper.find(`#${course.meta.slug}`).exists()).toBe(true)
   })
 
-  it('should play video by mouse over', async () => {
+  it('should play video on mouse over trigger', async () => {
     const wrapper = mount(CourseItem, {
       props: {
         course
       },
+      global: {
+        plugins: [router]
+      },
+      attachTo: document.body
     });
 
-    const spy = jest.fn();
+    const playStub = jest
+      .spyOn(window.HTMLMediaElement.prototype, 'play')
+      .mockImplementation(() => {})
 
-    const video = wrapper.find(`#${course.meta.slug}`).element;
-    video.addEventListener('play', spy);
+    const link = wrapper.findComponent({ name: 'RouterLink' });
 
-    const link = wrapper.find(`#courseId`);
+    await link.trigger('mouseenter')
 
-    await link.trigger('mouseover')
-
-    await nextTick();
-
-    // expect(wrapper.vm.paused).toBe(false);
-    expect(spy).toHaveBeenCalled();
+    expect(wrapper.vm.paused).toBe(false);
+    expect(playStub).toHaveBeenCalled();
   });
 });

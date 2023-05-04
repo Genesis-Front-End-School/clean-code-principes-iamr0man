@@ -11,18 +11,18 @@ export default {
   previewImageLink: "https://wisey.app/assets/images/web/course-covers/the-power-of-self-discipline-how-to-stay-on-track",
   rating: 5,
   meta: {
-  slug: "the-power-of-self-discipline-how-to-stay-on-track",
+    slug: "the-power-of-self-discipline-how-to-stay-on-track",
     skills: [
-    "Increasing self-awareness",
-    "Personal accountability",
-    "Developing a routine",
-    "Improving self-control",
-    "Focusing on long-term goals"
-  ],
+      "Increasing self-awareness",
+      "Personal accountability",
+      "Developing a routine",
+      "Improving self-control",
+      "Focusing on long-term goals"
+    ],
     courseVideoPreview: {
     link: "https://wisey.app/videos/the-power-of-self-discipline-how-to-stay-on-track/preview/AppleHLS1/preview.m3u8",
-      duration: 19,
-      previewImageLink: "https://wisey.app/assets/images/web/course-covers/the-power-of-self-discipline-how-to-stay-on-track/preview"
+    duration: 19,
+    previewImageLink: "https://wisey.app/assets/images/web/course-covers/the-power-of-self-discipline-how-to-stay-on-track/preview"
   }
 },
   lessons: [

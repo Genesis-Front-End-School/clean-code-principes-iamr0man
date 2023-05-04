@@ -7,8 +7,8 @@
             class="relative block min-h-[540px] bg-white border border-gray-200 rounded-lg shadow tablet:min-h-[200px] dark:bg-gray-800 dark:border-gray-700">
             <div class="p-4">
               <video
-                :ref="videoRefName"
                 id="selected-video"
+                ref="selectedVideo"
                 class="w-full max-w-full z-10"
                 :poster="posterPreviewLink"
                 playsinline
@@ -50,10 +50,10 @@
 
 <script lang="ts">
 import type { PropType } from 'vue';
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import type { ICourse } from '@/types/ICourse.types';
 import LessonItem from '@/components/lesson/LessonItem.vue';
-import Hls from 'hls.js';
+import Hls from 'hls.js'; 
 import NotFoundLayer from '@/components/lesson/VideoLayers/NotFoundLayer.vue';
 import LockedLayer from '@/components/lesson/VideoLayers/LockedLayer.vue';
 import PlaybackSpeedLayer from '@/components/lesson/VideoLayers/PlaybackSpeedLayer.vue';
@@ -73,13 +73,19 @@ export default defineComponent({
       required: true,
     },
   },
+  setup() {
+    const selectedVideo = ref<HTMLMediaElement | null>(null)
+
+    return {
+      selectedVideo,
+    }
+  },
   data: () => ({
     hls: new Hls(),
     lessonNumber: 1,
     notFound: false,
     speed: 1,
     speedChanged: false,
-    videoRefName: 'selected-video',
   }),
   computed: {
     isAvailable(): boolean {
@@ -115,7 +121,7 @@ export default defineComponent({
     speed(newValue: number) {
       this.speedChanged = true;
 
-      const video = this.$refs[this.videoRefName] as HTMLMediaElement;
+      const video = this.selectedVideo as HTMLMediaElement;
       video.playbackRate = newValue;
 
       setTimeout(() => (this.speedChanged = false), 400);
@@ -135,7 +141,7 @@ export default defineComponent({
       if (document.pictureInPictureElement) {
         document.exitPictureInPicture();
       } else if (document.pictureInPictureEnabled) {
-        const video = this.$refs[this.videoRefName] as HTMLVideoElement;
+        const video = this.selectedVideo as HTMLVideoElement;
         video.requestPictureInPicture();
       }
     },
@@ -179,7 +185,7 @@ export default defineComponent({
       return 0;
     },
     loadHlsPlayer() {
-      const video = this.$refs[this.videoRefName] as HTMLMediaElement;
+      const video = this.selectedVideo as HTMLMediaElement;
 
       this.initVideoListener(video);
 
@@ -199,7 +205,7 @@ export default defineComponent({
     },
     initVideoListener(video: HTMLMediaElement) {
       video.addEventListener('timeupdate', () => {
-        let currentTime = JSON.stringify(video.currentTime);
+        const currentTime = JSON.stringify(video.currentTime);
         if (!Number(currentTime)) {
           return;
         }

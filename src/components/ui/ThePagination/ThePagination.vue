@@ -1,8 +1,8 @@
 <template>
   <nav aria-label="Page navigation example">
     <div
-      class="text-sm text-gray-700 dark:text-gray-400 mb-2"
-      v-if="layout === 'table'">
+      v-if="layout === 'table'"
+      class="text-sm text-gray-700 dark:text-gray-400 mb-2">
       Showing
       <span class="font-semibold text-gray-900 dark:text-white">{{
         startItemsCount
@@ -174,7 +174,7 @@ export default defineComponent({
     },
     getPagesWithNewView() {
       const pages = [];
-      let startedPage =
+      const startedPage =
         this.modelValue - this.sliceLength > 0
           ? this.modelValue - this.sliceLength
           : 1;

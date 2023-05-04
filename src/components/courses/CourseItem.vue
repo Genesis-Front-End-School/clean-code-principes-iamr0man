@@ -1,12 +1,13 @@
 <template>
   <RouterLink
+    id="courseId"
     :to="course.id"
     class="border bg-opacity-50 rounded-lg shadow dark:border-gray-700"
     @mouseleave="stopVideo"
     @mouseenter="playVideo">
     <video
-      :class="videoClasses"
       :id="course.meta.slug"
+      :class="videoClasses"
       type="application/x-mpegURL"
       class="absolute min-w-[373px] max-h-[163px]"
       muted />

@@ -1,16 +1,9 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { assert } from '@/utils/ts-utils';
-import type { Response } from '@/api/api.types';
+import type { ApiService } from '@/api/api.types';
 import type { IAuth } from '@/api/localStorage.types';
 import { createRequestService } from '@/api/request';
 import type { ICourse } from '@/types/ICourse.types';
-
-export type ApiService = {
-  readonly signIn: () => Promise<Response<IAuth.Token>>;
-
-  readonly getCourses: () => Promise<Response<ICourse.Response>>;
-  readonly getCourseById: (courseId: string) => Promise<Response<ICourse.Item>>;
-};
 
 type RequestService = {
   readonly request: <K, T = {}>(
@@ -24,7 +17,6 @@ type AxiosDetailResponse = {
   readonly detail: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function isAxiosError(_e: unknown): _e is AxiosError<AxiosDetailResponse> {
   return true;
 }

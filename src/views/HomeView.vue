@@ -8,8 +8,8 @@
         :course="course" />
     </div>
     <ThePagination
-      class="mt-2"
       v-model="page"
+      class="mt-2"
       :per-page="3"
       :total-items="courses.length"
       :slice-length="2" />

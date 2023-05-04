@@ -14,7 +14,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      'hls.js': 'hls.js/dist/hls.min.js',
+      // 'hls.js': 'hls.js/dist/hls.min.js',
     },
   },
 });

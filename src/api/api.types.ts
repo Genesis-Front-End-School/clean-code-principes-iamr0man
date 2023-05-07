@@ -14,12 +14,6 @@ export type FailedOperationResponse = {
 
 export type Response<T = void> = FailedOperationResponse | SuccessOperationResponse<T>;
 
-export function isFailedOperationResult<T>(result: Response<T>): result is FailedOperationResponse {
-	return !result.isSuccess;
-}
-
-export function isSuccessOperationResult<T = unknown>(
-	result: Response<T>
-): result is SuccessOperationResponse<T> {
-	return result.isSuccess;
-}
+export type AxiosDetailResponse = {
+	readonly detail: string;
+};

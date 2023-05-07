@@ -29,3 +29,5 @@ coverage
 
 .jest
 .env
+
+__coverage__

@@ -1,7 +1,7 @@
 import { assert } from "@/utils/ts-utils";
-import type { FailedOperationResponse, Response, SuccessOperationResponse } from '@/api/api.types';
+import type { FailedOperationResponse, Response, SuccessOperationResponse } from '@/api/request.types';
 import type { AxiosError } from 'axios/index';
-import type { AxiosDetailResponse } from '@/api/api.types';
+import type { AxiosDetailResponse } from '@/api/request.types';
 
 export function isFailedOperationResult<T>(result: Response<T>): result is FailedOperationResponse {
   return !result.isSuccess;

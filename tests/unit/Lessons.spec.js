@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { nextTick } from 'vue';
-import course from './course'
+import course from './__mocks__/course'
 
 import Lesson from '../../src/components/lesson/Lessons.vue';
 import LockedLayer from '../../src/components/lesson/VideoLayers/LockedLayer.vue';

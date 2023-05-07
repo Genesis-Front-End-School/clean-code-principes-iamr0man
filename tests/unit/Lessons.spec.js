@@ -2,10 +2,10 @@ import { mount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import course from './__mocks__/course'
 
-import Lesson from '../../src/components/lesson/Lessons.vue';
-import LockedLayer from '../../src/components/lesson/VideoLayers/LockedLayer.vue';
-import NotFoundLayer from '../../src/components/lesson/VideoLayers/NotFoundLayer.vue';
-import PlaybackSpeedLayer from '../../src/components/lesson/VideoLayers/PlaybackSpeedLayer.vue';
+import Lesson from '../../src/components/pages/course/lesson/Lessons.vue';
+import LockedLayer from '../../src/components/pages/course/lesson/VideoLayers/LockedLayer.vue';
+import NotFoundLayer from '../../src/components/pages/course/lesson/VideoLayers/NotFoundLayer.vue';
+import PlaybackSpeedLayer from '../../src/components/pages/course/lesson/VideoLayers/PlaybackSpeedLayer.vue';
 
 describe('Video Overlays', () => {
   it('should render LockedLayer when "unlocked" is false', () => {

@@ -52,11 +52,11 @@
 import type { PropType } from 'vue';
 import { defineComponent, ref } from 'vue';
 import type { ICourse } from '@/types/ICourse.types';
-import LessonItem from '@/components/lesson/LessonItem.vue';
+import LessonItem from '@/components/pages/course/lesson/LessonItem.vue';
 import Hls from 'hls.js'; 
-import NotFoundLayer from '@/components/lesson/VideoLayers/NotFoundLayer.vue';
-import LockedLayer from '@/components/lesson/VideoLayers/LockedLayer.vue';
-import PlaybackSpeedLayer from '@/components/lesson/VideoLayers/PlaybackSpeedLayer.vue';
+import NotFoundLayer from '@/components/pages/course/lesson/VideoLayers/NotFoundLayer.vue';
+import LockedLayer from '@/components/pages/course/lesson/VideoLayers/LockedLayer.vue';
+import PlaybackSpeedLayer from '@/components/pages/course/lesson/VideoLayers/PlaybackSpeedLayer.vue';
 
 const DURATION_TIME_KEY = '--duration-time';
 

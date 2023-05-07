@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import NotFound from '@/components/error/NotFound.vue';
+import NotFound from '@/components/ui/error/NotFound.vue';
 
 export default defineComponent({
   name: 'ErrorBoundary',

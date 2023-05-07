@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CourseItem from '@/components/courses/CourseItem.vue';
+import CourseItem from '@/components/pages/home/CourseItem.vue';
 import Container from '@/components/ui/Container.vue';
 import { api } from '@/api/api';
 import ThePagination from '@/components/ui/ThePagination/ThePagination.vue';

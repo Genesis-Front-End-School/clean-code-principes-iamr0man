@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import course from './__mocks__/course'
 
-import CourseItem from '@/components/courses/CourseItem.vue';
+import CourseItem from '@/components/pages/home/CourseItem.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({

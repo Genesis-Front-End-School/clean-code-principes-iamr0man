@@ -17,7 +17,7 @@ function isAxiosError(_e: unknown): _e is AxiosError<AxiosDetailResponse> {
   return true;
 }
 
-export function errorHandler (e: unknown) {
+export function errorHandler (e: unknown): FailedOperationResponse {
   assert(isAxiosError(e));
 
   return {

@@ -27,7 +27,7 @@
         <PageItem
           :current-page="modelValue"
           :index="pageIndex"
-          @setPage="setPage" />
+          @set-page="setPage" />
       </li>
       <li>
         <NextButton
@@ -67,6 +67,7 @@ export default defineComponent({
     },
     totalItems: {
       type: Number,
+      default: 0,
       required: false,
     },
     layout: {
@@ -86,6 +87,7 @@ export default defineComponent({
       default: 'Next',
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     computedTotalPages(): number {
       if (!this.totalItems) return this.totalPages;

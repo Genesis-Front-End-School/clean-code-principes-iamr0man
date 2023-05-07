@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils';
-import { nextTick } from 'vue';
-import course from './__mocks__/course'
+import { availableCourse as course } from './__mocks__/course'
 
-import Lesson from '../../src/components/pages/course/lesson/Lessons.vue';
+import Lesson, { ArrowUpKey, ArrowDownKey, MIN_RATE, MAX_RATE } from '../../src/components/pages/course/lesson/Lessons.vue';
 import LockedLayer from '../../src/components/pages/course/lesson/VideoLayers/LockedLayer.vue';
 import NotFoundLayer from '../../src/components/pages/course/lesson/VideoLayers/NotFoundLayer.vue';
 import PlaybackSpeedLayer from '../../src/components/pages/course/lesson/VideoLayers/PlaybackSpeedLayer.vue';
+import { nextTick } from 'vue';
 
 describe('Video Overlays', () => {
   it('should render LockedLayer when "unlocked" is false', () => {
@@ -49,11 +49,12 @@ describe('Video Overlays', () => {
         };
       },
     });
+
     expect(wrapper.findComponent(PlaybackSpeedLayer).exists()).toBe(true);
     expect(wrapper.findComponent(PlaybackSpeedLayer).props('speed')).toBe(2.5);
   });
 
-  it('should increase "speedChanged" by min rate for layer component and video input', async () => {
+  it('should increase "speed" by min rate for layer component and video input', async () => {
     const wrapper = mount(Lesson, {
       props: {
         course
@@ -66,15 +67,91 @@ describe('Video Overlays', () => {
       },
     });
 
-    await nextTick();
+    const videoRefSelector = { ref: 'selectedVideo' }
+    const video = wrapper.find(videoRefSelector);
 
-    const input = wrapper.find({ ref: 'selectedVideo' });
-    await input.trigger('keydown', { key: 'ArrowUp' })
+    const supposedValue = wrapper.vm.speed + MIN_RATE;
+    await video.trigger('keydown', { key: ArrowUpKey })
 
-    expect(input.getRootNodes()[0].playbackRate).toBe(wrapper.vm.speed);
+    expect(video.getRootNodes()[0].playbackRate).toBe(supposedValue);
+    expect(video.getRootNodes()[0].playbackRate).toBe(wrapper.vm.speed);
+  });
 
-    expect(wrapper.findComponent(PlaybackSpeedLayer).exists()).toBe(wrapper.vm.speedChanged);
-    expect(wrapper.findComponent(PlaybackSpeedLayer).props('speed')).toBe(wrapper.vm.speed);
+  it('should decrease "speed" by min rate for layer component and video input', async () => {
+    const wrapper = mount(Lesson, {
+      props: {
+        course
+      },
+      data() {
+        return {
+          speedChanged: false,
+          speed: 1,
+        };
+      },
+    });
+
+    const videoRefSelector = { ref: 'selectedVideo' }
+    const video = wrapper.find(videoRefSelector);
+
+    const supposedValue = wrapper.vm.speed - MIN_RATE;
+    await video.trigger('keydown', { key: ArrowDownKey })
+
+    expect(video.getRootNodes()[0].playbackRate).toBe(supposedValue);
+    expect(video.getRootNodes()[0].playbackRate).toBe(wrapper.vm.speed);
+  });
+
+  it('speed should be in min boundaries', async () => {
+    const wrapper = mount(Lesson, {
+      props: {
+        course
+      },
+      data() {
+        return {
+          speedChanged: false,
+          speed: 1,
+        };
+      },
+    });
+
+    const videoRefSelector = { ref: 'selectedVideo' }
+    const video = wrapper.find(videoRefSelector);
+
+    for (let i = 0; i < 5; i++) {
+      video.trigger('keydown', { key: ArrowDownKey })
+    }
+
+    expect(wrapper.vm.speed).toBe(MIN_RATE);
+
+    await nextTick()
+
+    expect(video.getRootNodes()[0].playbackRate).toBe(wrapper.vm.speed);
+  });
+
+  it('speed should be in max boundaries', async () => {
+    const wrapper = mount(Lesson, {
+      props: {
+        course
+      },
+      data() {
+        return {
+          speedChanged: false,
+          speed: 4,
+        };
+      },
+    });
+
+    const videoRefSelector = { ref: 'selectedVideo' }
+    const video = wrapper.find(videoRefSelector);
+
+    for (let i = 0; i < 5; i++) {
+      video.trigger('keydown', { key: ArrowUpKey })
+    }
+
+    expect(wrapper.vm.speed).toBe(MAX_RATE);
+
+    await nextTick()
+
+    expect(video.getRootNodes()[0].playbackRate).toBe(wrapper.vm.speed);
   });
 })
 
@@ -108,7 +185,9 @@ describe('Video', () => {
       },
     });
 
-    expect(wrapper.find({ ref: 'selectedVideo' }).exists()).toBe(true)
+    const videoRefSelector = { ref: 'selectedVideo' }
+    const video = wrapper.find(videoRefSelector);
+    expect(video.exists()).toBe(true)
   })
 })
 

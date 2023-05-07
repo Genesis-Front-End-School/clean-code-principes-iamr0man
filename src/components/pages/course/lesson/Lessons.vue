@@ -58,7 +58,13 @@ import NotFoundLayer from '@/components/pages/course/lesson/VideoLayers/NotFound
 import LockedLayer from '@/components/pages/course/lesson/VideoLayers/LockedLayer.vue';
 import PlaybackSpeedLayer from '@/components/pages/course/lesson/VideoLayers/PlaybackSpeedLayer.vue';
 
-const DURATION_TIME_KEY = '--duration-time';
+export const DURATION_TIME_KEY = '--duration-time';
+
+export const ArrowUpKey = 'ArrowUp';
+export const ArrowDownKey = 'ArrowDown';
+
+export const MIN_RATE = 0.25;
+export const MAX_RATE = 5;
 
 export default defineComponent({
   components: {
@@ -146,16 +152,9 @@ export default defineComponent({
       }
     },
     changeVideoSpeed(event: KeyboardEvent) {
-      const ArrowUpKey = 'ArrowUp';
-      const ArrowDownKey = 'ArrowDown';
-
-      const MIN_RATE = 0.25;
-      const MAX_RATE = 5;
-
       if (this.speed <= MIN_RATE || this.speed >= MAX_RATE) {
         return;
       }
-
       switch (event.key) {
         case ArrowUpKey:
           this.speed += MIN_RATE;

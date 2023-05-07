@@ -97,15 +97,16 @@ export default defineComponent({
         return;
       }
 
-      this.paused = false;
-
       const linkOriginal = this.course.meta.courseVideoPreview.link;
       const video = document.getElementById(
         this.course.meta.slug,
       ) as HTMLMediaElement | null;
+
       if (!video) {
         return;
       }
+
+      this.paused = false;
 
       if (Hls.isSupported()) {
         this.hls.loadSource(linkOriginal);

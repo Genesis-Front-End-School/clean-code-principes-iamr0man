@@ -10,7 +10,7 @@
     <ThePagination
       v-model="page"
       class="mt-2"
-      :per-page="3"
+      :per-page="MAX_ITEMS_PER_PAGE"
       :total-items="courses.length"
       :slice-length="2" />
   </Container>
@@ -23,7 +23,7 @@ import Container from '@/components/ui/Container.vue';
 import { api } from '@/api/api';
 import ThePagination from '@/components/ui/ThePagination/ThePagination.vue';
 
-const MAX_ITEM_PER_LOAD = 3;
+const MAX_ITEMS_PER_PAGE = 3;
 
 export default defineComponent({
   components: { ThePagination, Container, CourseItem },
@@ -31,10 +31,14 @@ export default defineComponent({
     const data = await api.getCourses();
 
     if (data.isSuccess) {
-      return data.response;
+      return {
+        MAX_ITEMS_PER_PAGE,
+        courses: data.response.courses,
+      }
     }
 
     return {
+      MAX_ITEMS_PER_PAGE,
       courses: [],
     };
   },
@@ -44,8 +48,8 @@ export default defineComponent({
   computed: {
     paginatedCourses() {
       return this.courses.slice(
-        (this.page - 1) * MAX_ITEM_PER_LOAD,
-        this.page * MAX_ITEM_PER_LOAD,
+        (this.page - 1) * MAX_ITEMS_PER_PAGE,
+        this.page * MAX_ITEMS_PER_PAGE,
       );
     },
   },

@@ -1,8 +1,7 @@
 <template>
   <span
     :class="dynamicClasses"
-    class="text-xs text-center font-medium mr-2 px-2.5 py-0.5 rounded"
-  >
+    class="text-xs text-center font-medium mr-2 px-2.5 py-0.5 rounded">
     {{ name }}
   </span>
 </template>
@@ -22,7 +21,7 @@ export default defineComponent({
     },
   },
   computed: {
-    dynamicClasses() {
+    dynamicClasses(): string {
       switch (this.index) {
         case 0:
         case 5:
@@ -40,6 +39,7 @@ export default defineComponent({
         case 9:
           return 'bg-blue-100 text-blue-800';
       }
+      return '';
     },
   },
 });

@@ -3,7 +3,8 @@
     <div class="relative flex flex-col flex-1 h-full">
       <div class="flex py-12 gap-x-8 tablet:flex-col">
         <div class="basis-8/12 bg-blue-1100 tablet:mb-4">
-          <div class="relative block min-h-[540px] bg-white border border-gray-200 rounded-lg shadow tablet:min-h-[200px] dark:bg-gray-800 dark:border-gray-700">
+          <div
+            class="relative block min-h-[540px] bg-white border border-gray-200 rounded-lg shadow tablet:min-h-[200px] dark:bg-gray-800 dark:border-gray-700">
             <div class="p-4">
               <video
                 :ref="videoRefName"
@@ -13,37 +14,34 @@
                 playsinline
                 controls
                 :tabindex="tabbingIndex"
-                @keydown="changeVideoSpeed"
-              />
+                @keydown="changeVideoSpeed" />
               <div class="mt-2 flex justify-between items-center">
                 <p class="basis-4/6 mt-1 mobile:hidden">
-                  To change the speed of a video using the keyboard, you can use the "Arrow Up" key to increase the speed and the "Arrow Down" key to decrease it.
+                  To change the speed of a video using the keyboard, you can use
+                  the "Arrow Up" key to increase the speed and the "Arrow Down"
+                  key to decrease it.
                 </p>
                 <button
                   type="button"
                   class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  @click="togglePictureInPicture"
-                >
+                  @click="togglePictureInPicture">
                   Toggle picture-in-picture
                 </button>
               </div>
             </div>
             <LockedLayer v-if="!unlocked" />
             <NotFoundLayer v-if="notFound" />
-            <PlaybackSpeedLayer
-              :show="speedChanged"
-              :speed="speed"
-            />
+            <PlaybackSpeedLayer :show="speedChanged" :speed="speed" />
           </div>
         </div>
-        <ul class="max-h-[540px] text-scroll overflow-y-scroll basis-4/12 p-4 block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <ul
+          class="max-h-[540px] text-scroll overflow-y-scroll basis-4/12 p-4 block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <LessonItem
             v-for="lesson in lessons"
             :key="lesson.order"
             :lesson="lesson"
             :selected="lesson.order === lessonNumber"
-            @click="lessonNumber = lesson.order"
-          />
+            @click="lessonNumber = lesson.order" />
         </ul>
       </div>
     </div>
@@ -51,17 +49,16 @@
 </template>
 
 <script lang="ts">
-import type { PropType } from 'vue'
+import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
-import Container from '@/components/ui/Container.vue';
-import type { ICourse } from "@/types/ICourse.types";
-import LessonItem from "@/components/lesson/LessonItem.vue";
-import Hls from 'hls.js'
-import NotFoundLayer from "@/components/lesson/VideoLayers/NotFoundLayer.vue";
-import LockedLayer from "@/components/lesson/VideoLayers/LockedLayer.vue";
-import PlaybackSpeedLayer from "@/components/lesson/VideoLayers/PlaybackSpeedLayer.vue";
+import type { ICourse } from '@/types/ICourse.types';
+import LessonItem from '@/components/lesson/LessonItem.vue';
+import Hls from 'hls.js';
+import NotFoundLayer from '@/components/lesson/VideoLayers/NotFoundLayer.vue';
+import LockedLayer from '@/components/lesson/VideoLayers/LockedLayer.vue';
+import PlaybackSpeedLayer from '@/components/lesson/VideoLayers/PlaybackSpeedLayer.vue';
 
-const DURATION_TIME_KEY = '--duration-time'
+const DURATION_TIME_KEY = '--duration-time';
 
 export default defineComponent({
   components: {
@@ -69,13 +66,12 @@ export default defineComponent({
     LockedLayer,
     NotFoundLayer,
     LessonItem,
-    Container
   },
   props: {
     course: {
       type: Object as PropType<ICourse.Item>,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     hls: new Hls(),
@@ -83,54 +79,55 @@ export default defineComponent({
     notFound: false,
     speed: 1,
     speedChanged: false,
-    videoRefName: 'selected-video'
+    videoRefName: 'selected-video',
   }),
   computed: {
-		isAvailable () {
-			return this.unlocked || !this.notFound
+    isAvailable(): boolean {
+      return this.unlocked || !this.notFound;
     },
-    lessons () {
-      return this.course.lessons.sort((a, b) => a.order - b.order)
+    lessons(): ICourse.Lesson[] {
+      const lessonCopy = [...this.course.lessons];
+      return lessonCopy.sort((a, b) => a.order - b.order);
     },
-    currentLesson () {
+    currentLesson(): ICourse.Lesson {
       return this.lessons[Number(this.lessonNumber) - 1];
     },
-    posterPreviewLink () {
-      return `${this.currentLesson.previewImageLink}/lesson-${this.currentLesson.order}.webp`
+    posterPreviewLink(): string {
+      return `${this.currentLesson.previewImageLink}/lesson-${this.currentLesson.order}.webp`;
     },
-    unlocked () {
-      return this.currentLesson.status === 'unlocked'
+    unlocked(): boolean {
+      return this.currentLesson.status === 'unlocked';
     },
-    courseLessonKey () {
-      return `${this.course.id}-selected-lesson`
+    courseLessonKey(): string {
+      return `${this.course.id}-selected-lesson`;
     },
-    tabbingIndex () {
-      return !this.isAvailable ? -1 : 0
+    tabbingIndex(): number {
+      return !this.isAvailable ? -1 : 0;
     },
   },
   watch: {
-    currentLesson () {
-      this.loadHlsPlayer()
+    currentLesson() {
+      this.loadHlsPlayer();
     },
-    lessonNumber (newValue: number) {
-      this.setSelectedLocal(newValue)
+    lessonNumber(newValue: number) {
+      this.setSelectedLocal(newValue);
     },
-    speed (newValue: number) {
-      this.speedChanged = true
+    speed(newValue: number) {
+      this.speedChanged = true;
 
       const video = this.$refs[this.videoRefName] as HTMLMediaElement;
       video.playbackRate = newValue;
 
-      setTimeout(() => this.speedChanged = false, 400)
-    }
+      setTimeout(() => (this.speedChanged = false), 400);
+    },
   },
-  mounted () {
-    this.initSelectedLesson()
-    this.loadHlsPlayer()
+  mounted() {
+    this.initSelectedLesson();
+    this.loadHlsPlayer();
   },
   beforeUnmount() {
     if (this.hls) {
-      this.hls.destroy()
+      this.hls.destroy();
     }
   },
   methods: {
@@ -142,81 +139,87 @@ export default defineComponent({
         video.requestPictureInPicture();
       }
     },
-    changeVideoSpeed (event: KeyboardEvent) {
-      const ArrowUpKey = 'ArrowUp'
-      const ArrowDownKey = 'ArrowDown'
+    changeVideoSpeed(event: KeyboardEvent) {
+      const ArrowUpKey = 'ArrowUp';
+      const ArrowDownKey = 'ArrowDown';
 
-      const MIN_RATE = 0.25
-      const MAX_RATE = 5
+      const MIN_RATE = 0.25;
+      const MAX_RATE = 5;
 
       if (this.speed <= MIN_RATE || this.speed >= MAX_RATE) {
-        return
+        return;
       }
 
       switch (event.key) {
         case ArrowUpKey:
-          this.speed += MIN_RATE
-          break
+          this.speed += MIN_RATE;
+          break;
         case ArrowDownKey:
-          this.speed -= MIN_RATE
-          break
+          this.speed -= MIN_RATE;
+          break;
         default:
-          break
+          break;
       }
     },
-    initSelectedLesson () {
-      this.lessonNumber = Number(window.localStorage.getItem(this.courseLessonKey)) || 1
+    initSelectedLesson() {
+      this.lessonNumber =
+        Number(window.localStorage.getItem(this.courseLessonKey)) || 1;
     },
-    setSelectedLocal (order: number) {
+    setSelectedLocal(order: number) {
       window.localStorage.setItem(this.courseLessonKey, order.toString());
     },
     checkCurrentTime(): number {
-      const lastSecond = localStorage.getItem(this.currentLesson.id + DURATION_TIME_KEY);
+      const lastSecond = localStorage.getItem(
+        this.currentLesson.id + DURATION_TIME_KEY,
+      );
       if (lastSecond) {
         return Number(lastSecond);
       }
 
       return 0;
     },
-    loadHlsPlayer () {
+    loadHlsPlayer() {
       const video = this.$refs[this.videoRefName] as HTMLMediaElement;
 
-	    this.initVideoListener(video)
+      this.initVideoListener(video);
 
-			if (!this.isAvailable) {
-				this.resetVideoPlayer()
+      if (!this.isAvailable) {
+        this.resetVideoPlayer();
         return;
       }
 
       try {
         if (Hls.isSupported()) {
-          this.setHlsSourceAndListener(video)
+          this.setHlsSourceAndListener(video);
           return;
         }
       } catch (err) {
-        this.notFound = true
+        this.notFound = true;
       }
     },
-	  initVideoListener (video: HTMLMediaElement) {
-		  video.addEventListener('timeupdate', () => {
-			  let currentTime = JSON.stringify(video.currentTime)
-			  if (!Number(currentTime)) {
-				  return
-			  }
-			  localStorage.setItem(this.currentLesson.id + DURATION_TIME_KEY, currentTime);
-		  });
-	  },
-	  resetVideoPlayer () {
-		  this.hls.destroy()
-		  this.hls = new Hls()
-	  },
-	  setHlsSourceAndListener(video: HTMLMediaElement) {
-	    this.hls.loadSource(this.currentLesson.link);
-	    this.hls.attachMedia(video);
-	    this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
-		    video.currentTime = this.checkCurrentTime();
-	    });
-    }
-  }
-})
+    initVideoListener(video: HTMLMediaElement) {
+      video.addEventListener('timeupdate', () => {
+        let currentTime = JSON.stringify(video.currentTime);
+        if (!Number(currentTime)) {
+          return;
+        }
+        localStorage.setItem(
+          this.currentLesson.id + DURATION_TIME_KEY,
+          currentTime,
+        );
+      });
+    },
+    resetVideoPlayer() {
+      this.hls.destroy();
+      this.hls = new Hls();
+    },
+    setHlsSourceAndListener(video: HTMLMediaElement) {
+      this.hls.loadSource(this.currentLesson.link);
+      this.hls.attachMedia(video);
+      this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.currentTime = this.checkCurrentTime();
+      });
+    },
+  },
+});
 </script>

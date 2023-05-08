@@ -1,11 +1,14 @@
-import { createRequestService, type RequestService } from '@/api/request';
+import { createRequestService } from '@/api/request';
 import { errorHandler } from '@/utils/response-check';
-import type { Response } from '@/api/request.types';
+import type { IRequestService, Response } from '@/api/request.types';
 import { IAuth } from '@/gateway/auth.gateway.types';
 import type { LocalStorage } from '@/api/localStorage.types';
 import { createLocalStorage } from '@/api/localStorage';
 
-const createAuthGateway = (requestService: RequestService, localStorage: LocalStorage) => {
+const createAuthGateway = (
+  requestService: IRequestService,
+  localStorage: LocalStorage,
+) => {
   const setLocalAccessToken = (token: string) => {
     localStorage.setItem(IAuth.Enum.Token.AccessToken, token);
   }
@@ -15,6 +18,7 @@ const createAuthGateway = (requestService: RequestService, localStorage: LocalSt
   }
 
   return {
+    getLocalAccessToken,
     initToken: async function() {
       const loggedIn = getLocalAccessToken();
 

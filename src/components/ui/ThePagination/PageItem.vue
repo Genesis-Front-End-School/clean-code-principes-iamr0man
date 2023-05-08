@@ -23,6 +23,7 @@ export default defineComponent({
       required: true,
     },
   },
+  emits: ['setPage'],
   computed: {
     disabled(): boolean {
       return this.index === this.currentPage;

@@ -115,7 +115,7 @@ export default defineComponent({
 
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.then(() => {}).catch(() => {});
+        playPromise.then().catch();
       }
     },
     stopVideo() {

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Lesson from './Lesson.vue';
+import Lesson from './Lessons.vue';
 import LockedLayer from './VideoLayers/LockedLayer.vue';
 import NotFoundLayer from './VideoLayers/NotFoundLayer.vue';
 import PlaybackSpeedLayer from './VideoLayers/PlaybackSpeedLayer.vue';

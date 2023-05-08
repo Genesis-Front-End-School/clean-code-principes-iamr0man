@@ -23,18 +23,22 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import CourseItem from '@/components/courses/CourseItem.vue';
-import { getCourses } from '@/database/courses.gateway';
 import Container from '@/components/ui/Container.vue';
+import { api } from "@/api/api";
 
 const MAX_ITEM_PER_LOAD = 6;
 
 export default defineComponent({
   components: { Container, CourseItem },
   async setup() {
-    const courses = await getCourses();
+    const data = await api.getCourses();
+
+		if (data.isSuccess) {
+			return data.response;
+    }
 
     return {
-      courses,
+      courses: [],
     };
   },
   data: () => ({

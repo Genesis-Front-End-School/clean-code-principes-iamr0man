@@ -7,7 +7,7 @@ module.exports = {
     node: true,
   },
   rules: {
-    "prettier/prettier": ["error", { "singleQuote": true }]
+    'prettier/prettier': ['error', { singleQuote: true }],
   },
   parser: 'vue-eslint-parser',
   parserOptions: {
@@ -23,9 +23,6 @@ module.exports = {
     'eslint:recommended',
     'prettier',
     '@vue/eslint-config-prettier',
+    '@vue/eslint-config-typescript',
   ],
 };
-
-// ref: refactor according review;
-//
-// add types for auth api; add new computed; divide function into small parts; fix lint errors;

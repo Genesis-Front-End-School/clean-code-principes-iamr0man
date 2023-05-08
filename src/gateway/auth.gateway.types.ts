@@ -1,5 +1,5 @@
 export namespace IAuth {
-  export interface Response {
+  export type Token = {
     token: string;
   }
 

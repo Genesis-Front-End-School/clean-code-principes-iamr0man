@@ -1,6 +1,6 @@
 import axiosOriginal from 'axios';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { getLocalAccessToken } from '@/api/auth';
+import { getLocalAccessToken } from '@/api/localStorage';
 
 const baseURL = `${import.meta.env.VITE_API_BASE_URL}/${
   import.meta.env.VITE_API_VERSION

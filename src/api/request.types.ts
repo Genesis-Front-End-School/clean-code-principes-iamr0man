@@ -1,3 +1,5 @@
+import type { AxiosResponse } from 'axios';
+
 export type SuccessOperationResponse<T = void> = T extends void
   ? {
       readonly isSuccess: true;
@@ -18,4 +20,12 @@ export type Response<T = void> =
 
 export type AxiosDetailResponse = {
   readonly detail: string;
+};
+
+export type IRequestService = {
+  readonly request: <K, T = {}>(
+    endpoint: string,
+    method: string,
+    payload?: T,
+  ) => Promise<AxiosResponse<K>>;
 };

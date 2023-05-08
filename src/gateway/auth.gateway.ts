@@ -7,7 +7,7 @@ import { createLocalStorage } from '@/api/localStorage';
 
 const createAuthGateway = (requestService: RequestService, localStorage: LocalStorage) => {
   const setLocalAccessToken = (token: string) => {
-    return localStorage.setItem(IAuth.Enum.Token.AccessToken, token);
+    localStorage.setItem(IAuth.Enum.Token.AccessToken, token);
   }
 
   const getLocalAccessToken = () => {

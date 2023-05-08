@@ -9,9 +9,9 @@
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import Container from '@/components/ui/Container.vue';
-import Lessons from '@/components/lesson/Lessons.vue';
-import { api } from '@/api/api';
-import CourseBody from '@/components/course-details/CourseBody.vue';
+import Lessons from "@/components/lesson/Lessons.vue";
+import { courseGateway } from "@/gateway/courses.gateway";
+import CourseBody from "@/components/course-details/CourseBody.vue";
 
 export default defineComponent({
   components: {
@@ -21,7 +21,7 @@ export default defineComponent({
   },
   async setup() {
     const route = useRoute();
-    const course = await api.getCourseById(route.params.id as string);
+    const course = await courseGateway.getCourseById(route.params.id as string)
 
     if (course.isSuccess) {
       return {

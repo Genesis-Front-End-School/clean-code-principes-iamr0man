@@ -1,6 +1,7 @@
 import axiosOriginal from 'axios';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { getLocalAccessToken } from '@/api/localStorage';
+
+import { IAuth } from '@/gateway/auth.gateway.types';
 
 const baseURL = `${import.meta.env.VITE_API_BASE_URL}/${
   import.meta.env.VITE_API_VERSION
@@ -16,7 +17,7 @@ const axios: AxiosInstance = axiosOriginal.create(axiosOptions);
 
 axios.interceptors.request.use(
   async (config) => {
-    config.headers.Authorization = 'Bearer ' + getLocalAccessToken();
+    config.headers.Authorization = 'Bearer ' + localStorage.getItem(IAuth.Enum.Token.AccessToken);
     return config;
   },
   (error) => {

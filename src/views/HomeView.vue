@@ -20,15 +20,15 @@
 import { defineComponent } from 'vue';
 import CourseItem from '@/components/pages/home/CourseItem.vue';
 import Container from '@/components/ui/Container.vue';
-import { api } from '@/api/api';
 import ThePagination from '@/components/ui/ThePagination/ThePagination.vue';
+import { courseGateway } from '@/gateway/courses.gateway';
 
 const MAX_ITEMS_PER_PAGE = 3;
 
 export default defineComponent({
   components: { ThePagination, Container, CourseItem },
   async setup() {
-    const data = await api.getCourses();
+    const data = await courseGateway.getCourses();
 
     if (data.isSuccess) {
       return {

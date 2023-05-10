@@ -2,21 +2,8 @@
   <RouterLink
     :id="course.id"
     :to="course.id"
-    class="border bg-opacity-50 rounded-lg shadow dark:border-gray-700"
-    @mouseleave="stopVideo"
-    @mouseenter="playVideo">
-    <video
-      :id="course.meta.slug"
-      :class="videoClasses"
-      type="application/x-mpegURL"
-      class="absolute min-w-[373px] max-h-[163px]"
-      muted />
-    <img
-      :class="imagePreviewClasses"
-      :src="previewImageLink"
-      :alt="course.title"
-      class="rounded-t-lg h-[163px] object-contain mx-auto" />
-
+    class="border bg-opacity-50 rounded-lg shadow dark:border-gray-700">
+    <VideoPlayerPreview :course="course" />
     <div class="flex h-[60%] flex-col items-start justify-between p-5">
       <div>
         <h5
@@ -53,83 +40,16 @@ import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
 import IconArrow from '@/components/icons/IconArrow.vue';
 import type { ICourse } from '@/types/ICourse.types';
-import Hls from 'hls.js';
 import IconStar from '@/components/icons/IconStar.vue';
+import VideoPlayerPreview from '@/components/pages/home/VideoPlayerPreview.vue';
 
 export default defineComponent({
   name: 'CourseItem',
-  components: { IconStar, IconArrow },
+  components: { VideoPlayerPreview, IconStar, IconArrow },
   props: {
     course: {
       type: Object as PropType<ICourse.ShortPreview>,
       required: true,
-    },
-  },
-  data: () => ({
-    hls: new Hls(),
-    paused: true,
-  }),
-  computed: {
-    isAvailable() {
-      return (
-        this.course.meta.courseVideoPreview &&
-        this.course.meta.courseVideoPreview.duration > 0
-      );
-    },
-    previewImageLink() {
-      return this.course.previewImageLink + '/cover.webp';
-    },
-    videoClasses() {
-      return { 'z-10': !this.paused };
-    },
-    imagePreviewClasses() {
-      return { 'opacity-0': !this.paused };
-    },
-  },
-  unmounted() {
-    if (this.hls) {
-      this.hls.destroy();
-    }
-  },
-  methods: {
-    playVideo() {
-      if (!this.isAvailable) {
-        return;
-      }
-
-      const linkOriginal = this.course.meta.courseVideoPreview.link;
-      const video = document.getElementById(
-        this.course.meta.slug,
-      ) as HTMLMediaElement | null;
-
-      if (!video) {
-        return;
-      }
-
-      this.paused = false;
-
-      if (Hls.isSupported()) {
-        this.hls.loadSource(linkOriginal);
-        this.hls.attachMedia(video);
-      }
-
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.then().catch();
-      }
-    },
-    stopVideo() {
-      const video = document.getElementById(
-        this.course.meta.slug,
-      ) as HTMLMediaElement | null;
-      if (!video) {
-        return;
-      }
-
-      video.pause();
-      video.currentTime = 0;
-
-      this.paused = true;
     },
   },
 });

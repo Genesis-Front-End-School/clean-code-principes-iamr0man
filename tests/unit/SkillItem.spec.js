@@ -34,11 +34,11 @@ describe('SkillItem', () => {
       },
     });
 
-    const greenIndex = [0, 5]
-    const yellowIndex = [1, 6]
-    const redIndex = [2, 7]
-    const orangeIndex = [3, 8]
-    const blueIndex = [4, 9]
+    const greenIndex = 0
+    const yellowIndex = 1
+    const redIndex = 2
+    const orangeIndex = 3
+    const blueIndex = 4
 
     const cssMap = {
       [greenIndex]: 'bg-green-100 text-green-800',

@@ -13,7 +13,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "types": ["vite/client", "@types/jest"],
+    "types": ["vite/client", "@types/jest", "node"],
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "paths": { "@/*": ["src/*"] }
   },

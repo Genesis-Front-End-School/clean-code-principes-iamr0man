@@ -3,7 +3,7 @@ import { routes } from '@/router/routes';
 import { authGateway } from '@/gateway/auth.gateway';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
   routes
 });
 

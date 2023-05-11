@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils';
-import { availableCourse as course } from './__mocks__/course'
+import { availableCourse as course } from '../../../__mocks__/course'
 
-import Lesson, { ArrowUpKey, ArrowDownKey, MIN_RATE, MAX_RATE } from '../../src/components/pages/course/lesson/Lessons.vue';
-import LockedLayer from '../../src/components/pages/course/lesson/VideoLayers/LockedLayer.vue';
-import NotFoundLayer from '../../src/components/pages/course/lesson/VideoLayers/NotFoundLayer.vue';
-import PlaybackSpeedLayer from '../../src/components/pages/course/lesson/VideoLayers/PlaybackSpeedLayer.vue';
+import Lesson, { ArrowUpKey, ArrowDownKey, MIN_RATE, MAX_RATE } from '../../pages/course/lesson/Lessons.vue';
+import LockedLayer from '../../pages/course/lesson/VideoLayers/LockedLayer.vue';
+import NotFoundLayer from '../../pages/course/lesson/VideoLayers/NotFoundLayer.vue';
+import PlaybackSpeedLayer from '../../pages/course/lesson/VideoLayers/PlaybackSpeedLayer.vue';
 import { nextTick } from 'vue';
 
 describe('Video Overlays', () => {

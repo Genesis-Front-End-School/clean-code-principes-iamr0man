@@ -20,7 +20,7 @@ module.exports = {
     // process js files with jest
     '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
   },
-  // we will use this to create snapshot tests
+  // we will use this to create snapshot __tests__
   snapshotSerializers: ['jest-serializer-vue'],
   // used for jsdom to mimic a real browser with a real url
   testURL: 'http://localhost/',

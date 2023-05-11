@@ -1,20 +1,18 @@
 <template>
-  <div>
-    <Suspense>
-      <template #default>
-        <RouterView v-slot="{ Component }">
-          <ErrorBoundary>
-            <transition name="scale">
-              <component :is="Component" />
-            </transition>
-          </ErrorBoundary>
-        </RouterView>
-      </template>
-      <template #fallback>
-        <span>Loading...</span>
-      </template>
-    </Suspense>
-  </div>
+  <Suspense>
+    <template #default>
+      <RouterView v-slot="{ Component }">
+        <ErrorBoundary>
+          <transition name="scale">
+            <component :is="Component" />
+          </transition>
+        </ErrorBoundary>
+      </RouterView>
+    </template>
+    <template #fallback>
+      <span>Loading...</span>
+    </template>
+  </Suspense>
 </template>
 
 <script lang="ts">

@@ -5,10 +5,17 @@ import { IAuth } from '@/gateway/auth.gateway.types';
 import type { LocalStorage } from '@/api/localStorage.types';
 import { createLocalStorage } from '@/api/localStorage';
 
-const createAuthGateway = (
+export interface IAuthGateway {
+  setLocalAccessToken: (token: string) => void;
+  getLocalAccessToken: () => string | null;
+  initToken: () => Promise<void>;
+  signIn: () =>  Promise<Response<IAuth.Token>>
+}
+
+export const createAuthGateway = (
   requestService: IRequestService,
   localStorage: LocalStorage,
-) => {
+): IAuthGateway => {
   const setLocalAccessToken = (token: string) => {
     localStorage.setItem(IAuth.Enum.Token.AccessToken, token);
   }
@@ -18,15 +25,16 @@ const createAuthGateway = (
   }
 
   return {
+    setLocalAccessToken,
     getLocalAccessToken,
     initToken: async function() {
-      const loggedIn = getLocalAccessToken();
+      const loggedIn = this.getLocalAccessToken();
 
       if (!loggedIn) {
         const data = await this.signIn();
 
         if (data.isSuccess) {
-          setLocalAccessToken(data.response.token);
+          this.setLocalAccessToken(data.response.token);
         }
       }
     },

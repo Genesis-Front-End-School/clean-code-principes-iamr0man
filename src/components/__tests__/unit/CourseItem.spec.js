@@ -1,5 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import { availableCourse as course, notAvailableCourse } from './__mocks__/course'
+import { availableCourse as course, notAvailableCourse } from '../../../__mocks__/course'
 
 import CourseItem from '@/components/pages/home/CourseItem.vue';
 import { createRouter, createWebHistory } from 'vue-router';

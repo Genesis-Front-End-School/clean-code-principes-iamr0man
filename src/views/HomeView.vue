@@ -11,8 +11,10 @@
       v-model="page"
       class="mt-2"
       :per-page="MAX_ITEMS_PER_PAGE"
-      :total-items="courses.length"
-      :slice-length="2" />
+      :total-items="totalItems"
+      :slice-length="2"
+      @update:model-value="setPage"
+    />
   </Container>
 </template>
 
@@ -21,37 +23,16 @@ import { defineComponent } from 'vue';
 import CourseItem from '@/components/pages/home/CourseItem.vue';
 import Container from '@/components/ui/Container.vue';
 import ThePagination from '@/components/ui/ThePagination/ThePagination.vue';
-import { courseGateway } from '@/gateway/courses.gateway';
-
-const MAX_ITEMS_PER_PAGE = 3;
+import { useLocalPagination } from '@/composables/useLocalPagination';
+import { MAX_ITEMS_PER_PAGE } from '@/constants';
 
 export default defineComponent({
   components: { ThePagination, Container, CourseItem },
   async setup() {
-    const data = await courseGateway.getCourses();
-
-    if (data.isSuccess) {
-      return {
-        MAX_ITEMS_PER_PAGE,
-        courses: data.response.courses,
-      }
-    }
-
     return {
+      ...useLocalPagination(),
       MAX_ITEMS_PER_PAGE,
-      courses: [],
-    };
-  },
-  data: () => ({
-    page: 1,
-  }),
-  computed: {
-    paginatedCourses() {
-      return this.courses.slice(
-        (this.page - 1) * MAX_ITEMS_PER_PAGE,
-        this.page * MAX_ITEMS_PER_PAGE,
-      );
-    },
+    }
   },
 });
 </script>

@@ -3,7 +3,7 @@ import type { ICourse } from '@/types/ICourse.types';
 import { createRequestService } from '@/api/request';
 import type { IRequestService, Response } from '@/api/request.types';
 
-const createCoursesGateway = (requestService: IRequestService) => {
+export const createCoursesGateway = (requestService: IRequestService) => {
   return {
     getCourses: async (): Promise<Response<ICourse.Response>> => {
       try {

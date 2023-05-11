@@ -1,4 +1,4 @@
-import { formatDuration } from './formatDuration';
+import { formatDuration } from '../formatDuration';
 
 describe('formatDuration', () => {
   it('formats duration correctly when seconds < 10', () => {

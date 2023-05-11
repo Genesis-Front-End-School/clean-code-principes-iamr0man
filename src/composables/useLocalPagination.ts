@@ -16,23 +16,27 @@ export const useLocalPagination = () => {
 
   const totalItems = computed(() => courses.value.length)
 
+  const totalPages = computed(() => Math.ceil(courses.value.length / MAX_ITEMS_PER_PAGE))
+
   const setPage = (newValue: number) => {
     page.value = newValue;
   }
 
-  onMounted(async () => {
-    const data = await courseGateway.getCourses();
+  const fetchCourses = () => {
+    courseGateway.getCourses().then((data) => {
+      if (data.isSuccess) {
+        courses.value = data.response.courses
+      }
+    })
+  }
 
-    if (data.isSuccess) {
-      courses.value = data.response.courses
-    }
-  })
+  onMounted(fetchCourses)
 
   return {
     page,
     paginatedCourses,
     totalItems,
+    totalPages,
     setPage,
-    MAX_ITEMS_PER_PAGE
   }
 }

@@ -12,7 +12,8 @@
       class="mt-2"
       :per-page="MAX_ITEMS_PER_PAGE"
       :total-items="totalItems"
-      :slice-length="2"
+      :total-pages="totalPages"
+      :slice-length="SLICE_LENGTH"
       @update:model-value="setPage"
     />
   </Container>
@@ -24,14 +25,15 @@ import CourseItem from '@/components/pages/home/CourseItem.vue';
 import Container from '@/components/ui/Container.vue';
 import ThePagination from '@/components/ui/ThePagination/ThePagination.vue';
 import { useLocalPagination } from '@/composables/useLocalPagination';
-import { MAX_ITEMS_PER_PAGE } from '@/constants';
+import { MAX_ITEMS_PER_PAGE, SLICE_LENGTH } from '@/constants';
 
 export default defineComponent({
   components: { ThePagination, Container, CourseItem },
-  async setup() {
+  setup() {
     return {
       ...useLocalPagination(),
       MAX_ITEMS_PER_PAGE,
+      SLICE_LENGTH,
     }
   },
 });

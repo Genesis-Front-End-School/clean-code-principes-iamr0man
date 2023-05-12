@@ -19,14 +19,7 @@ import type { PropType } from 'vue';
 import { defineComponent, ref } from 'vue';
 import type { ICourse } from '@/types/ICourse.types';
 import Hls from 'hls.js';
-
-export const DURATION_TIME_KEY = '--duration-time';
-
-export const ArrowUpKey = 'ArrowUp';
-export const ArrowDownKey = 'ArrowDown';
-
-export const MIN_RATE = 0.25;
-export const MAX_RATE = 5;
+import { ArrowDownKey, ArrowUpKey, DURATION_TIME_KEY, MAX_RATE, MIN_RATE } from '@/constants';
 
 export default defineComponent({
   props: {

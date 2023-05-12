@@ -68,6 +68,11 @@ export default defineComponent({
   },
   methods: {
     playVideo() {
+      if (!this.isAvailable) {
+        return;
+      }
+
+      if (!this.activeVideo) {
       if (!this.isAvailable || !this.activeVideo) {
         return;
       }

@@ -1,4 +1,4 @@
-export const MAX_ITEMS_PER_PAGE = 3;
+export const MAX_ITEMS_PER_PAGE = 6;
 export const SLICE_LENGTH = 2;
 
 export const DURATION_TIME_KEY = '--duration-time';

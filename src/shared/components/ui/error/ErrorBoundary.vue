@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col items-center">
     <NotFound v-if="error" />
     <slot v-else />
   </div>

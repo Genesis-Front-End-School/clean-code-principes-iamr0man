@@ -1,11 +1,11 @@
 <template>
   <li
     :class="{ 'dark:bg-gray-500': selected }"
-    class="px-1 py-2.5 flex justify-between items-center border-b cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 last:border-b-0">
-    <p class="text-white text-lg basis-5/6">
+    class="px-1 py-2.5 flex justify-between items-center text-gray-900 border-b cursor-pointer hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 last:border-b-0">
+    <p class="text-lg basis-5/6">
       <span class="font-bold">{{ lesson.order }}.</span> {{ lesson.title }}
     </p>
-    <span class="text-white text-sm basis-1/6 text-end">{{ duration }}</span>
+    <span class="text-sm basis-1/6 text-end">{{ duration }}</span>
   </li>
 </template>
 

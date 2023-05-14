@@ -1,7 +1,7 @@
 import { axios } from '@/shared/utils/axios'
 import { createCoursesGateway } from '@/shared/gateway/courses.gateway';
 import { createRequestService } from '@/shared/api/request';
-import { courses, courseDetails } from '@/__mocks__'
+import { courses, courseDetails } from '@/shared/__mocks__'
 
 jest.mock('axios', () => {
   return {

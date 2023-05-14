@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { availableCourse as course } from '../../../../__mocks__/course'
+import { availableCourse as course } from '../../../../shared/__mocks__/course'
 
 import Lesson from '../Lessons.vue';
 import LockedLayer from '../VideoLayers/LockedLayer.vue';

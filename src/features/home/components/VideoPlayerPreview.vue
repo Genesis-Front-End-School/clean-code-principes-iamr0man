@@ -73,7 +73,6 @@ export default defineComponent({
       }
 
       if (!this.activeVideo) {
-      if (!this.isAvailable || !this.activeVideo) {
         return;
       }
 

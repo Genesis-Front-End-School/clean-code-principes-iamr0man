@@ -2,7 +2,7 @@ import { flushPromises, mount } from '@vue/test-utils';
 import { defineComponent, h, Suspense } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { courseDetails } from '@/__mocks__';
+import { courseDetails } from '@/shared/__mocks__';
 import CourseView from '@/features/course/view/CourseView.vue';
 import { axios } from '@/shared/utils/axios';
 

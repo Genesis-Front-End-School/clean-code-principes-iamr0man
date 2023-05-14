@@ -1,5 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import { availableCourse as course, notAvailableCourse } from '../../../../__mocks__/course'
+import { availableCourse as course, notAvailableCourse } from '../../../../shared/__mocks__/course'
 
 import VideoPlayerPreview from '@/features/home/components/VideoPlayerPreview.vue';
 

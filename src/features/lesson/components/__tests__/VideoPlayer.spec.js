@@ -1,5 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import { availableCourse as course, notAvailableCourse } from '../../../../__mocks__/course'
+import { availableCourse as course, notAvailableCourse } from '../../../../shared/__mocks__/course'
 import VideoPlayer from '@/features/lesson/components/VideoPlayer.vue';
 import { nextTick } from 'vue';
 import { ArrowDownKey, ArrowUpKey, MAX_RATE, MIN_RATE } from '@/shared/constants';

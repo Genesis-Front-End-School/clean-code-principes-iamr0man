@@ -18,7 +18,7 @@
 <script lang="ts">
 import { RouterView } from 'vue-router';
 import { defineComponent } from 'vue';
-import ErrorBoundary from '@/components/ui/error/ErrorBoundary.vue';
+import ErrorBoundary from '@/shared/components/ui/error/ErrorBoundary.vue';
 
 export default defineComponent({
   components: {

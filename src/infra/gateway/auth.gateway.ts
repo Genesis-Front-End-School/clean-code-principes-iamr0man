@@ -1,9 +1,9 @@
-import { createRequestService } from '@/shared/api/request';
-import { errorHandler } from '@/shared/utils/response-check';
-import type { IRequestService, Response } from '@/shared/api/request.types';
-import { IAuth } from '@/shared/gateway/auth.gateway.types';
-import type { LocalStorage } from '@/shared/api/localStorage.types';
-import { createLocalStorage } from '@/shared/api/localStorage';
+import { createRequestService } from '@/infra/api/request';
+import { errorHandler } from '@/infra/utils/response-check';
+import type { IRequestService, Response } from '@/infra/api/request.types';
+import { IAuth } from '@/infra/gateway/auth.gateway.types';
+import type { LocalStorage } from '@/infra/api/localStorage.types';
+import { createLocalStorage } from '@/infra/api/localStorage';
 
 export interface IAuthGateway {
   setLocalAccessToken: (token: string) => void;

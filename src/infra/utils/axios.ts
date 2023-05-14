@@ -1,7 +1,7 @@
 import axiosOriginal from 'axios';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-import { IAuth } from '@/shared/gateway/auth.gateway.types';
+import { IAuth } from '@/infra/gateway/auth.gateway.types';
 
 const baseURL = `${process.env.VITE_API_BASE_URL}/${
   process.env.VITE_API_VERSION

@@ -1,4 +1,4 @@
-import { courseGateway } from '@/shared/gateway/courses.gateway';
+import { courseGateway } from '@/infra/gateway/courses.gateway';
 import { computed, onMounted, ref } from 'vue';
 import { ICourse } from '@/features/home/types/ICourse.types';
 import { MAX_ITEMS_PER_PAGE } from '@/shared/constants';

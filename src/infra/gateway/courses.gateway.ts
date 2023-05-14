@@ -1,7 +1,7 @@
-import { errorHandler } from '@/shared/utils/response-check';
-import type { ICourse } from '@/shared/types/ICourse.types';
-import { createRequestService } from '@/shared/api/request';
-import type { IRequestService, Response } from '@/shared/api/request.types';
+import { errorHandler } from '@/infra/utils/response-check';
+import type { ICourse } from '@/infra/types/ICourse.types';
+import { createRequestService } from '@/infra/api/request';
+import type { IRequestService, Response } from '@/infra/api/request.types';
 
 export const createCoursesGateway = (requestService: IRequestService) => {
   return {

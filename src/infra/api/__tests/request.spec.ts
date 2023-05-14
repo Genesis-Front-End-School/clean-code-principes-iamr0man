@@ -1,4 +1,4 @@
-import { createRequestService } from '@/shared/api/request';
+import { createRequestService } from '@/infra/api/request';
 
 describe('Request service fabric', () => {
   it('return method described in contract', () => {

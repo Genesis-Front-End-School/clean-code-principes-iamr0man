@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { availableCourse as course } from '@/shared/__mocks__/course'
+import { availableCourse as course } from '@/__mocks__/course'
 
 import { createRouter, createWebHistory } from 'vue-router';
 import CourseItem from '@/features/home/components/CourseItem.vue';

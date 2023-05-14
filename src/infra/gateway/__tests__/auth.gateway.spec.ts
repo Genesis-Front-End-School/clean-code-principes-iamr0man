@@ -1,7 +1,7 @@
-import { axios } from '@/shared/utils/axios'
-import { createRequestService } from '@/shared/api/request';
-import { createLocalStorage } from '@/shared/api/localStorage';
-import { createAuthGateway } from '@/shared/gateway/auth.gateway';
+import { axios } from '@/infra/utils/axios'
+import { createRequestService } from '@/infra/api/request';
+import { createLocalStorage } from '@/infra/api/localStorage';
+import { createAuthGateway } from '@/infra/gateway/auth.gateway';
 
 jest.mock('axios', () => {
   return {

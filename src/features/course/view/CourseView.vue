@@ -11,7 +11,7 @@ import { useRoute } from 'vue-router';
 import Container from '@/shared/components/ui/Container.vue';
 import Lessons from '@/features/lesson/components/Lessons.vue';
 import CourseDetails from '@/features/course/components/CourseDetails.vue';
-import { courseGateway } from '@/shared/gateway/courses.gateway';
+import { courseGateway } from '@/infra/gateway/courses.gateway';
 
 export default defineComponent({
   components: {

@@ -1,6 +1,6 @@
 import { flushPromises, mount } from '@vue/test-utils';
-import { courses } from '@/shared/__mocks__';
-import { axios } from '@/shared/utils/axios';
+import { courses } from '@/__mocks__';
+import { axios } from '@/infra/utils/axios';
 import HomeView from '@/features/home/view/HomeView.vue';
 import { defineComponent, h, Suspense } from 'vue';
 import ThePagination from '@/shared/components/ui/ThePagination/ThePagination.vue';

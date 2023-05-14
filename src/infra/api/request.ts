@@ -1,5 +1,5 @@
-import { axios } from '@/shared/utils/axios';
-import type { IRequestService } from '@/shared/api/request.types';
+import { axios } from '@/infra/utils/axios';
+import type { IRequestService } from '@/infra/api/request.types';
 
 export function createRequestService(): IRequestService {
   return {

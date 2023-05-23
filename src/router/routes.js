@@ -1,6 +1,6 @@
-import HomeView from '@/views/HomeView.vue';
-import Course from '@/views/CourseView.vue';
-import PageNotFound from '@/views/PageNotFoundView.vue';
+import HomeView from '@/features/home/view/HomeView.vue';
+import Course from '@/features/course/view/CourseView.vue';
+import PageNotFound from '@/features/page-not-found/view/PageNotFoundView.vue';
 
 export const routes = [
   {

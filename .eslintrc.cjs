@@ -19,7 +19,8 @@ module.exports = {
     "prettier"
   ],
   "parserOptions": {
-    "ecmaVersion": 2021
+    "ecmaVersion": 2021,
+    tsconfigRootDir: __dirname,
   },
   "plugins": ['jest'],
   "rules": {

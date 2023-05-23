@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import NotFound from '@/shared/components/ui/error/NotFound.vue';
+import NotFound from '@/shared/components/ui/Error/NotFound.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -11,7 +11,7 @@ describe('NotFound', () => {
   it('should display not found message', async () => {
     const wrapper = await shallowMount(NotFound);
 
-    const notFoundMessage = "Sorry, the course you are looking for  cannot be found or there seems  to be an error.  Please try again, and if the error persists, please try again later.  Return back"
+    const notFoundMessage = "Sorry, the course you are looking for  cannot be found or there seems  to be an Error.  Please try again, and if the Error persists, please try again later.  Return back"
 
     expect(wrapper.text()).toContain(notFoundMessage)
   });

@@ -35,7 +35,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
-import Rating from '@/shared/components/ui/Rating.vue';
+import { Rating } from 'udewi-ui';
 import SkillItem from '@/features/course/components/SkillItem.vue';
 import type { ICourse } from '@/features/course/types/ICourse.types';
 

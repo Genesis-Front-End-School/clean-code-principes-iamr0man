@@ -22,7 +22,9 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/shared/components/__tests__/**/*.ts"
+    "src/shared/components/__tests__/**/*.ts",
+    "src/components/__tests__/**/*.ts",
+    "index.lib.ts"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,7 +1,20 @@
 {
-  "name": "clean-code-principle",
-  "version": "1.0.8",
+  "name": "udewi-ui",
+  "version": "1.0.0",
   "description": "",
+  "private": false,
+  "files": [
+    "./dist"
+  ],
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
   "author": "iamr0man <koriny4@gmail.com>",
   "scripts": {
     "build": "vite build",
@@ -17,7 +30,8 @@
     "pinia": "^2.0.28",
     "tslib": "^2.5.0",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "udewi-ui": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
@@ -51,11 +65,13 @@
     "postcss": "^8.4.16",
     "postcss-import": "^15.0.0",
     "prettier": "^2.7.1",
+    "rollup-plugin-visualizer": "^5.9.0",
     "sass": "^1.54.9",
     "tailwindcss": "^3.1.8",
     "ts-jest": "^29.1.0",
     "typescript": "^4.9.5",
     "vite": "^4.0.0",
+    "vite-plugin-dts": "^2.3.0",
     "vite-svg-loader": "^3.6.0",
     "vue-cli-plugin-test": "~1.0.2",
     "vue-eslint-parser": "^9.1.1"

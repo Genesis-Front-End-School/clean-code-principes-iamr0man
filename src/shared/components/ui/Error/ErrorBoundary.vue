@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import NotFound from '@/shared/components/ui/error/NotFound.vue';
+import { NotFound } from 'udewi-ui';
 
 export default defineComponent({
   name: 'ErrorBoundary',

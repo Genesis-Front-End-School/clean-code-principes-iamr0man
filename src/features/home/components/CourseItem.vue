@@ -38,9 +38,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
-import IconArrow from '@/shared/components/icons/IconArrow.vue';
+import { IconArrow, IconStar } from 'udewi-ui';
 import type { ICourse } from '@/features/home/types/ICourse.types';
-import IconStar from '@/shared/components/icons/IconStar.vue';
 import VideoPlayerPreview from '@/features/home/components/VideoPlayerPreview.vue';
 
 export default defineComponent({

@@ -19,8 +19,7 @@
 <script lang="ts">
 import { RouterView } from 'vue-router';
 import { defineComponent } from 'vue';
-import ErrorBoundary from '@/shared/components/ui/error/ErrorBoundary.vue';
-import ThemeButton from '@/shared/components/ui/ThemeButton.vue';
+import { ErrorBoundary, ThemeButton } from 'udewi-ui';
 
 export default defineComponent({
   components: {

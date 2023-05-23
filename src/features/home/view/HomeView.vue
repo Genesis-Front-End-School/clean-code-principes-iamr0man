@@ -25,11 +25,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import CourseItem from '@/features/home/components/CourseItem.vue';
-import Container from '@/shared/components/ui/Container.vue';
-import ThePagination from '@/shared/components/ui/ThePagination/ThePagination.vue';
+import { Container, Loader, ThePagination} from 'udewi-ui';
 import { useLocalPagination } from '@/features/home/composables/useLocalPagination';
 import { MAX_ITEMS_PER_PAGE, SLICE_LENGTH } from '@/shared/constants';
-import Loader from '@/shared/components/ui/Loader.vue';
 
 export default defineComponent({
   components: { Loader, ThePagination, Container, CourseItem },

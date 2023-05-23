@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils';
-import ErrorBoundary from '@/shared/components/ui/error/ErrorBoundary.vue';
+import ErrorBoundary from '@/shared/components/ui/Error/ErrorBoundary.vue';
 import SkillItem from '@/features/course/components/SkillItem.vue';
-import NotFound from '@/shared/components/ui/error/NotFound.vue';
+import NotFound from '@/shared/components/ui/Error/NotFound.vue';
 
 describe('ErrorBoundary', () => {
-  it('should render slot if error does not exists', async () => {
+  it('should render slot if Error does not exists', async () => {
     const wrapper = mount(ErrorBoundary, {
       slots: {
         default: SkillItem
@@ -15,7 +15,7 @@ describe('ErrorBoundary', () => {
     expect(wrapper.findComponent(NotFound).exists()).toBe(false)
   })
 
-  it('should render NotFound if error exists', async () => {
+  it('should render NotFound if Error exists', async () => {
     const wrapper = mount(ErrorBoundary, {
       slots: {
         default: SkillItem

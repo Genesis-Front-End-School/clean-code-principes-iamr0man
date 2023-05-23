@@ -6,6 +6,7 @@ import { defineComponent, h, Suspense } from 'vue';
 import ThePagination from '@/shared/components/ui/ThePagination/ThePagination.vue';
 import CourseItem from '@/features/home/components/CourseItem.vue';
 import { MAX_ITEMS_PER_PAGE, SLICE_LENGTH } from '@/shared/constants';
+import Loader from '@/shared/components/ui/Loader.vue';
 
 jest.mock('axios', () => {
   return {
@@ -51,6 +52,30 @@ describe('HomeView', () => {
     const courseItemComponents = wrapper.findAllComponents(CourseItem)
 
     expect(paginationComponent.props().totalItems).toBe(courses.length)
+    expect(courseItemComponents.length).toBe(MAX_ITEMS_PER_PAGE)
+  })
+
+  it('should display loader if courses are loading', async () => {
+    const wrapper = await mount(HomeView)
+
+    const loaderComponent = wrapper.findComponent(Loader)
+
+    expect(loaderComponent.exists()).toBe(true);
+  })
+
+  it('should not display loader if courses are loading', async () => {
+    axios.request.mockResolvedValueOnce({
+      data: {
+        courses
+      }
+    });
+
+    const wrapper = await mountSuspense(HomeView)
+
+    const loaderComponent = wrapper.findComponent(Loader)
+    const courseItemComponents = wrapper.findAllComponents(CourseItem)
+
+    expect(loaderComponent.exists()).toBe(false);
     expect(courseItemComponents.length).toBe(MAX_ITEMS_PER_PAGE)
   })
 

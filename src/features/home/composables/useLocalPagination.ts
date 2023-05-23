@@ -6,6 +6,7 @@ import { MAX_ITEMS_PER_PAGE } from '@/shared/constants';
 export const useLocalPagination = () => {
   const page = ref(1);
   const courses = ref<ICourse.ShortPreview[]>([])
+  const loading = ref(true);
 
   const paginatedCourses = computed(() => {
     return courses.value.slice(
@@ -24,6 +25,8 @@ export const useLocalPagination = () => {
 
   const fetchCourses = () => {
     courseGateway.getCourses().then((data) => {
+      loading.value = false;
+
       if (data.isSuccess) {
         courses.value = data.response.courses
       }
@@ -34,6 +37,7 @@ export const useLocalPagination = () => {
 
   return {
     page,
+    loading,
     paginatedCourses,
     totalItems,
     totalPages,

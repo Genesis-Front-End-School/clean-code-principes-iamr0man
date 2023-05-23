@@ -19,7 +19,7 @@
                 </template>
               </VideoPlayer>
               <div class="mt-2 flex justify-between items-center">
-                <p class="basis-4/6 mt-1 mobile:hidden">
+                <p class="basis-4/6 mt-1 text-gray-900 dark:text-white mobile:hidden">
                   To change the speed of a video using the keyboard, you can use
                   the "Arrow Up" key to increase the speed and the "Arrow Down"
                   key to decrease it.

@@ -1,21 +1,24 @@
 <template>
   <Container class="flex flex-col justify-center items-center">
-    <div
-      class="grid grid-cols-3 gap-y-12 gap-x-12 tablet:grid-cols-2 mobile:grid-cols-1 mobile:gap-x-0">
-      <CourseItem
-        v-for="course in paginatedCourses"
-        :key="course.id"
-        :course="course" />
+    <Loader v-if="loading" />
+    <div v-else class="flex flex-col items-center">
+      <div
+        class="grid grid-cols-3 gap-y-12 gap-x-12 tablet:grid-cols-2 mobile:grid-cols-1 mobile:gap-x-0">
+        <CourseItem
+          v-for="course in paginatedCourses"
+          :key="course.id"
+          :course="course" />
+      </div>
+      <ThePagination
+        v-model="page"
+        class="mt-5"
+        :per-page="MAX_ITEMS_PER_PAGE"
+        :total-items="totalItems"
+        :total-pages="totalPages"
+        :slice-length="SLICE_LENGTH"
+        @update:model-value="setPage"
+      />
     </div>
-    <ThePagination
-      v-model="page"
-      class="mt-2"
-      :per-page="MAX_ITEMS_PER_PAGE"
-      :total-items="totalItems"
-      :total-pages="totalPages"
-      :slice-length="SLICE_LENGTH"
-      @update:model-value="setPage"
-    />
   </Container>
 </template>
 
@@ -26,9 +29,10 @@ import Container from '@/shared/components/ui/Container.vue';
 import ThePagination from '@/shared/components/ui/ThePagination/ThePagination.vue';
 import { useLocalPagination } from '@/features/home/composables/useLocalPagination';
 import { MAX_ITEMS_PER_PAGE, SLICE_LENGTH } from '@/shared/constants';
+import Loader from '@/shared/components/ui/Loader.vue';
 
 export default defineComponent({
-  components: { ThePagination, Container, CourseItem },
+  components: { Loader, ThePagination, Container, CourseItem },
   setup() {
     return {
       ...useLocalPagination(),

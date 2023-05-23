@@ -3,6 +3,7 @@
     <template #default>
       <RouterView v-slot="{ Component }">
         <ErrorBoundary>
+          <ThemeButton />
           <transition name="scale">
             <component :is="Component" />
           </transition>
@@ -19,9 +20,11 @@
 import { RouterView } from 'vue-router';
 import { defineComponent } from 'vue';
 import ErrorBoundary from '@/shared/components/ui/error/ErrorBoundary.vue';
+import ThemeButton from '@/shared/components/ui/ThemeButton.vue';
 
 export default defineComponent({
   components: {
+    ThemeButton,
     RouterView,
     ErrorBoundary,
   },

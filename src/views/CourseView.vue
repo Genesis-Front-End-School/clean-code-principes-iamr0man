@@ -1,6 +1,6 @@
 <template>
   <Container>
-    <CourseBody :course="course" />
+    <CourseDetails :course="course" />
     <Lessons :course="course" />
   </Container>
 </template>
@@ -9,13 +9,13 @@
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import Container from '@/components/ui/Container.vue';
-import Lessons from '@/components/lesson/Lessons.vue';
+import Lessons from '@/components/pages/course/lesson/Lessons.vue';
+import CourseDetails from '@/components/pages/course/CourseDetails.vue';
 import { courseGateway } from '@/gateway/courses.gateway';
-import CourseBody from '@/components/course-details/CourseBody.vue';
 
 export default defineComponent({
   components: {
-    CourseBody,
+    CourseDetails,
     Lessons,
     Container,
   },

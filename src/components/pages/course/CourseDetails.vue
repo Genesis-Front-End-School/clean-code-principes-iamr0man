@@ -36,11 +36,11 @@
 import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
 import Rating from '@/components/ui/Rating.vue';
-import SkillItem from '@/components/lesson/SkillItem.vue';
+import SkillItem from '@/components/pages/course/lesson/SkillItem.vue';
 import type { ICourse } from '@/types/ICourse.types';
 
 export default defineComponent({
-  name: 'CourseBody',
+  name: 'CourseDetails',
   components: {
     SkillItem,
     Rating,

@@ -1,26 +1,24 @@
 <template>
-  <div>
-    <Suspense>
-      <template #default>
-        <RouterView v-slot="{ Component }">
-          <ErrorBoundary>
-            <transition name="scale">
-              <component :is="Component" />
-            </transition>
-          </ErrorBoundary>
-        </RouterView>
-      </template>
-      <template #fallback>
-        <span>Loading...</span>
-      </template>
-    </Suspense>
-  </div>
+  <Suspense>
+    <template #default>
+      <RouterView v-slot="{ Component }">
+        <ErrorBoundary>
+          <transition name="scale">
+            <component :is="Component" />
+          </transition>
+        </ErrorBoundary>
+      </RouterView>
+    </template>
+    <template #fallback>
+      <span>Loading...</span>
+    </template>
+  </Suspense>
 </template>
 
 <script lang="ts">
 import { RouterView } from 'vue-router';
 import { defineComponent } from 'vue';
-import ErrorBoundary from '@/components/error/ErrorBoundary.vue';
+import ErrorBoundary from '@/components/ui/error/ErrorBoundary.vue';
 
 export default defineComponent({
   components: {

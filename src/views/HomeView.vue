@@ -8,46 +8,33 @@
         :course="course" />
     </div>
     <ThePagination
-      class="mt-2"
       v-model="page"
-      :per-page="3"
-      :total-items="courses.length"
-      :slice-length="2" />
+      class="mt-2"
+      :per-page="MAX_ITEMS_PER_PAGE"
+      :total-items="totalItems"
+      :total-pages="totalPages"
+      :slice-length="SLICE_LENGTH"
+      @update:model-value="setPage"
+    />
   </Container>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CourseItem from '@/components/courses/CourseItem.vue';
+import CourseItem from '@/components/pages/home/CourseItem.vue';
 import Container from '@/components/ui/Container.vue';
 import ThePagination from '@/components/ui/ThePagination/ThePagination.vue';
-import { courseGateway } from '@/gateway/courses.gateway';
-
-const MAX_ITEM_PER_LOAD = 3;
+import { useLocalPagination } from '@/composables/useLocalPagination';
+import { MAX_ITEMS_PER_PAGE, SLICE_LENGTH } from '@/constants';
 
 export default defineComponent({
   components: { ThePagination, Container, CourseItem },
-  async setup() {
-    const data = await courseGateway.getCourses();
-
-    if (data.isSuccess) {
-      return data.response;
-    }
-
+  setup() {
     return {
-      courses: [],
-    };
-  },
-  data: () => ({
-    page: 1,
-  }),
-  computed: {
-    paginatedCourses() {
-      return this.courses.slice(
-        (this.page - 1) * MAX_ITEM_PER_LOAD,
-        this.page * MAX_ITEM_PER_LOAD,
-      );
-    },
+      ...useLocalPagination(),
+      MAX_ITEMS_PER_PAGE,
+      SLICE_LENGTH,
+    }
   },
 });
 </script>

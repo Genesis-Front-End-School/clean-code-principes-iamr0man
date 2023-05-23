@@ -1,8 +1,8 @@
 <template>
   <nav aria-label="Page navigation example">
     <div
-      class="text-sm text-gray-700 dark:text-gray-400 mb-2"
-      v-if="layout === 'table'">
+      v-if="layout === 'table'"
+      class="text-sm text-gray-700 dark:text-gray-400 mb-2">
       Showing
       <span class="font-semibold text-gray-900 dark:text-white">{{
         startItemsCount
@@ -27,7 +27,7 @@
         <PageItem
           :current-page="modelValue"
           :index="pageIndex"
-          @setPage="setPage" />
+          @set-page="setPage" />
       </li>
       <li>
         <NextButton
@@ -67,6 +67,7 @@ export default defineComponent({
     },
     totalItems: {
       type: Number,
+      default: 0,
       required: false,
     },
     layout: {
@@ -86,6 +87,7 @@ export default defineComponent({
       default: 'Next',
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     computedTotalPages(): number {
       if (!this.totalItems) return this.totalPages;
@@ -174,7 +176,7 @@ export default defineComponent({
     },
     getPagesWithNewView() {
       const pages = [];
-      let startedPage =
+      const startedPage =
         this.modelValue - this.sliceLength > 0
           ? this.modelValue - this.sliceLength
           : 1;

@@ -3,8 +3,8 @@ import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import { IAuth } from '@/gateway/auth.gateway.types';
 
-const baseURL = `${import.meta.env.VITE_API_BASE_URL}/${
-  import.meta.env.VITE_API_VERSION
+const baseURL = `${process.env.VITE_API_BASE_URL}/${
+  process.env.VITE_API_VERSION
 }`;
 
 export const axiosOptions: AxiosRequestConfig = {

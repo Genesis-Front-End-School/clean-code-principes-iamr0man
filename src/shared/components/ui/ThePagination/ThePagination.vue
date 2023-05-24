@@ -2,7 +2,8 @@
   <nav aria-label="Page navigation example">
     <div
       v-if="layout === 'table'"
-      class="text-sm text-gray-700 dark:text-gray-400 mb-2">
+      class="text-sm text-gray-700 dark:text-gray-400 mb-2"
+    >
       Showing
       <span class="font-semibold text-gray-900 dark:text-white">{{
         startItemsCount
@@ -21,19 +22,25 @@
         <PreviousButton
           :disabled="isDecreaseDisabled"
           :label="previousLabel"
-          @click="decreasePage" />
+          @click="decreasePage"
+        />
       </li>
-      <li v-for="pageIndex in pagesToDisplay" :key="pageIndex">
+      <li
+        v-for="pageIndex in pagesToDisplay"
+        :key="pageIndex"
+      >
         <PageItem
           :current-page="modelValue"
           :index="pageIndex"
-          @set-page="setPage" />
+          @set-page="setPage"
+        />
       </li>
       <li>
         <NextButton
           :disabled="isIncreaseDisabled"
           :label="nextLabel"
-          @click="increasePage" />
+          @click="increasePage"
+        />
       </li>
     </ul>
   </nav>
@@ -105,15 +112,13 @@ export default defineComponent({
       if (this.layout === 'navigation') return [];
       if (this.layout === 'table') return [];
 
-      const sliceLengthCoverAllPages =
-        this.computedTotalPages <= this.sliceLength * 2 + 1;
+      const sliceLengthCoverAllPages = this.computedTotalPages <= this.sliceLength * 2 + 1;
       if (sliceLengthCoverAllPages) return this.getTotalPagesArray();
 
       const withoutSliceLength = this.modelValue <= this.sliceLength;
       if (withoutSliceLength) return this.getPagesWithoutSlice();
 
-      const endOfPagination =
-        this.modelValue >= this.computedTotalPages - this.sliceLength;
+      const endOfPagination = this.modelValue >= this.computedTotalPages - this.sliceLength;
       if (endOfPagination) return this.getEndOfPagination();
 
       return this.getPagesWithNewView();
@@ -146,19 +151,18 @@ export default defineComponent({
     },
     getTotalPagesArray() {
       const pages = [];
-      for (let page = 1; page <= this.computedTotalPages; page++) {
+      for (let page = 1; page <= this.computedTotalPages; page += 1) {
         pages.push(page);
       }
       return pages;
     },
     getPagesWithoutSlice() {
       const pages = [];
-      const slicedLength =
-        Math.abs(this.modelValue - this.sliceLength) +
-        this.modelValue +
-        this.sliceLength +
-        1;
-      for (let page = 1; page <= slicedLength; page++) {
+      const slicedLength = Math.abs(this.modelValue - this.sliceLength)
+        + this.modelValue
+        + this.sliceLength
+        + 1;
+      for (let page = 1; page <= slicedLength; page += 1) {
         pages.push(page);
       }
       return pages;
@@ -168,7 +172,7 @@ export default defineComponent({
       for (
         let page = Math.abs(this.computedTotalPages - this.sliceLength * 2);
         page <= this.computedTotalPages;
-        page++
+        page += 1
       ) {
         pages.push(page);
       }
@@ -176,14 +180,13 @@ export default defineComponent({
     },
     getPagesWithNewView() {
       const pages = [];
-      const startedPage =
-        this.modelValue - this.sliceLength > 0
-          ? this.modelValue - this.sliceLength
-          : 1;
+      const startedPage = this.modelValue - this.sliceLength > 0
+        ? this.modelValue - this.sliceLength
+        : 1;
       for (
         let page = startedPage;
         page < this.modelValue + this.sliceLength + 1;
-        page++
+        page += 1
       ) {
         if (page >= this.computedTotalPages) break;
         pages.push(page);

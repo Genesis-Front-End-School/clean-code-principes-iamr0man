@@ -1,13 +1,13 @@
 import type { App, Plugin } from 'vue'
 
-import Container from './Container.vue'
+import ContainerWrapper from './ContainerWrapper.vue'
 
 export default {
   install(app: App) {
-    app.component('Container', Container)
+    app.component('ContainerWrapper', ContainerWrapper)
   }
 } as Plugin
 
 export {
-  Container
+  ContainerWrapper
 }

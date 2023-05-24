@@ -13,9 +13,9 @@ import svgLoader from 'vite-svg-loader';
 export default defineConfig({
   define: {
     'process.env': {
-      'VITE_API_BASE_URL': 'https://api.wisey.app',
-      'VITE_API_VERSION': 'api/v1'
-    }
+      VITE_API_BASE_URL: 'https://api.wisey.app',
+      VITE_API_VERSION: 'api/v1',
+    },
   },
   server: {
     port: 8080,
@@ -29,7 +29,7 @@ export default defineConfig({
       formats: ['umd', 'es', 'cjs'],
     },
     rollupOptions: {
-      external: ['vue', 'vue-router',],
+      external: ['vue', 'vue-router'],
       output: {
         globals: {
           vue: 'Vue',

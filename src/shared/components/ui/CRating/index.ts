@@ -1,13 +1,13 @@
 import type { App, Plugin } from 'vue'
 
-import Rating from './Rating.vue'
+import CRating from './CRating.vue'
 
 export default {
   install(app: App) {
-    app.component('Rating', Rating)
+    app.component('CRating', CRating)
   }
 } as Plugin
 
 export {
-  Rating
+  CRating
 }

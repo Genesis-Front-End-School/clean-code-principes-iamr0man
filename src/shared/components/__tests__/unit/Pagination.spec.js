@@ -13,9 +13,9 @@ describe('Pagination', () => {
         sliceLength: 2,
       },
     });
-    const prevButton = wrapper.findComponent(PreviousButton)
-    expect(prevButton.vm.$attrs.disabled).toBe(true)
-  })
+    const prevButton = wrapper.findComponent(PreviousButton);
+    expect(prevButton.vm.$attrs.disabled).toBe(true);
+  });
 
   it('should the next button be disabled on the last page', () => {
     const wrapper = mount(ThePagination, {
@@ -29,9 +29,9 @@ describe('Pagination', () => {
 
     wrapper.vm.increasePage();
 
-    const nextButton = wrapper.findComponent(NextButton)
-    expect(nextButton.vm.$attrs.disabled).toBe(true)
-  })
+    const nextButton = wrapper.findComponent(NextButton);
+    expect(nextButton.vm.$attrs.disabled).toBe(true);
+  });
 
   it('should render PageItem length equivalent sliceLength * 2 + 1 size if page size greater then 1', () => {
     const wrapper = mount(ThePagination, {
@@ -43,8 +43,8 @@ describe('Pagination', () => {
       },
     });
 
-    expect(wrapper.findAllComponents(PageItem).length).toBe(wrapper.vm.$props.sliceLength * 2 + 1)
-  })
+    expect(wrapper.findAllComponents(PageItem).length).toBe(wrapper.vm.$props.sliceLength * 2 + 1);
+  });
 
   it('should render PageItem length equivalent totalPages size if slice length small', () => {
     const wrapper = mount(ThePagination, {
@@ -56,8 +56,8 @@ describe('Pagination', () => {
       },
     });
 
-    expect(wrapper.findAllComponents(PageItem).length).toBe(wrapper.vm.computedTotalPages)
-  })
+    expect(wrapper.findAllComponents(PageItem).length).toBe(wrapper.vm.computedTotalPages);
+  });
 
   it('should render PageItem length equivalent totalPages size if slice length big', () => {
     const wrapper = mount(ThePagination, {
@@ -69,27 +69,26 @@ describe('Pagination', () => {
       },
     });
 
-    expect(wrapper.findAllComponents(PageItem).length).toBe(wrapper.vm.computedTotalPages)
-  })
+    expect(wrapper.findAllComponents(PageItem).length).toBe(wrapper.vm.computedTotalPages);
+  });
 
   it('emitted', () => {
-    const wrapper = mount(ThePagination)
+    const wrapper = mount(ThePagination);
 
-    wrapper.vm.increasePage()
-    wrapper.vm.decreasePage()
+    wrapper.vm.increasePage();
+    wrapper.vm.decreasePage();
 
-    expect(wrapper.emitted()).toHaveProperty(['update:modelValue'])
-    expect(wrapper.emitted()['update:modelValue']).toHaveLength(2)
-  })
+    expect(wrapper.emitted()).toHaveProperty(['update:modelValue']);
+    expect(wrapper.emitted()['update:modelValue']).toHaveLength(2);
+  });
 
   it('should hide pages for tablet or navigation layout', () => {
     const wrapper = mount(ThePagination, {
       props: {
-        layout: 'navigation'
-      }
-    })
+        layout: 'navigation',
+      },
+    });
 
-    expect(wrapper.findAllComponents(PageItem).length).toBe(0)
-  })
-})
-
+    expect(wrapper.findAllComponents(PageItem).length).toBe(0);
+  });
+});

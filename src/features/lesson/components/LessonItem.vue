@@ -1,7 +1,8 @@
 <template>
   <li
     :class="{ 'dark:bg-gray-500': selected }"
-    class="px-1 py-2.5 flex justify-between items-center text-gray-900 border-b cursor-pointer hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 last:border-b-0">
+    class="px-1 py-2.5 flex justify-between items-center text-gray-900 border-b cursor-pointer hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 last:border-b-0"
+  >
     <p class="text-lg basis-5/6">
       <span class="font-bold">{{ lesson.order }}.</span> {{ lesson.title }}
     </p>

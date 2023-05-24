@@ -10,16 +10,21 @@
       :tabindex="tabbingIndex"
       @keydown="changeVideoSpeed"
     />
-    <slot :speed-changed="speedChanged" :speed="speed" />
+    <slot
+      :speed-changed="speedChanged"
+      :speed="speed"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import type { PropType } from 'vue';
 import { defineComponent, ref } from 'vue';
-import type { ICourse } from '@/features/course/types/ICourse.types';
 import Hls from 'hls.js';
-import { ArrowDownKey, ArrowUpKey, DURATION_TIME_KEY, MAX_RATE, MIN_RATE } from '@/shared/constants';
+import type { ICourse } from '@/features/course/types/ICourse.types';
+import {
+  ArrowDownKey, ArrowUpKey, DURATION_TIME_KEY, MAX_RATE, MIN_RATE,
+} from '@/shared/constants';
 
 export default defineComponent({
   props: {
@@ -30,15 +35,15 @@ export default defineComponent({
     currentLesson: {
       type: Object as PropType<ICourse.Lesson>,
       required: true,
-    }
+    },
   },
   emits: ['notFound', 'paused'],
   setup() {
-    const selectedVideo = ref<HTMLMediaElement | null>(null)
+    const selectedVideo = ref<HTMLMediaElement | null>(null);
 
     return {
       selectedVideo,
-    }
+    };
   },
   data: () => ({
     hls: new Hls(),
@@ -63,7 +68,7 @@ export default defineComponent({
       const video = this.selectedVideo as HTMLMediaElement;
       video.playbackRate = newValue;
 
-      setTimeout(() => (this.speedChanged = false), 400);
+      setTimeout(() => { this.speedChanged = false; }, 400);
     },
   },
   mounted() {

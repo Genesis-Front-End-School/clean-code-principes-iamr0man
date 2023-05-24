@@ -4,7 +4,8 @@
       <div class="flex py-12 gap-x-8 tablet:flex-col">
         <div class="basis-8/12 bg-blue-1100 tablet:mb-4">
           <div
-            class="relative block min-h-[540px] bg-white border border-gray-200 rounded-lg shadow tablet:min-h-[200px] dark:bg-gray-800 dark:border-gray-700">
+            class="relative block min-h-[540px] bg-white border border-gray-200 rounded-lg shadow tablet:min-h-[200px] dark:bg-gray-800 dark:border-gray-700"
+          >
             <div class="p-4">
               <VideoPlayer
                 ref="selectedVideo"
@@ -15,7 +16,10 @@
                 <template #default="{ speedChanged, speed }">
                   <LockedLayer v-if="!unlocked" />
                   <NotFoundLayer v-if="notFound" />
-                  <PlaybackSpeedLayer :show="speedChanged" :speed="speed" />
+                  <PlaybackSpeedLayer
+                    :show="speedChanged"
+                    :speed="speed"
+                  />
                 </template>
               </VideoPlayer>
               <div class="mt-2 flex justify-between items-center">
@@ -27,7 +31,8 @@
                 <button
                   type="button"
                   class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  @click="togglePictureInPicture">
+                  @click="togglePictureInPicture"
+                >
                   Toggle picture-in-picture
                 </button>
               </div>
@@ -35,13 +40,15 @@
           </div>
         </div>
         <ul
-          class="max-h-[540px] text-scroll overflow-y-scroll basis-4/12 p-4 block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          class="max-h-[540px] text-scroll overflow-y-scroll basis-4/12 p-4 block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        >
           <LessonItem
             v-for="lesson in lessons"
             :key="lesson.order"
             :lesson="lesson"
             :selected="lesson.order === lessonNumber"
-            @click="lessonNumber = lesson.order" />
+            @click="lessonNumber = lesson.order"
+          />
         </ul>
       </div>
     </div>
@@ -73,11 +80,11 @@ export default defineComponent({
     },
   },
   setup() {
-    const selectedVideo = ref<HTMLMediaElement | null>(null)
+    const selectedVideo = ref<HTMLMediaElement | null>(null);
 
     return {
       selectedVideo,
-    }
+    };
   },
   data: () => ({
     lessonNumber: 1,
@@ -111,7 +118,7 @@ export default defineComponent({
   },
   methods: {
     setNotFound(newValue: boolean) {
-      this.notFound = newValue
+      this.notFound = newValue;
     },
     togglePictureInPicture() {
       const videoElement = this.selectedVideo as HTMLVideoElement;
@@ -122,18 +129,17 @@ export default defineComponent({
           }
 
           videoElement.requestPictureInPicture();
-        } catch(err) {
+        } catch (err) {
           console.log('There no possible way to show picture-in-picture mode');
         }
       }
     },
     initSelectedLesson() {
-      this.lessonNumber =
-        Number(localStorage.getItem(this.courseLessonKey)) || 1;
+      this.lessonNumber = Number(localStorage.getItem(this.courseLessonKey)) || 1;
     },
     setSelectedLocal(order: number) {
       window.localStorage.setItem(this.courseLessonKey, order.toString());
-    }
+    },
   },
 });
 </script>

@@ -1,12 +1,13 @@
 import type { App, Plugin } from 'vue'
 
-import Loader from './Loader.vue'
+import CLoader from './CLoader.vue'
+
 export default {
   install(app: App) {
-    app.component('Loader', Loader)
+    app.component('CLoader', CLoader)
   }
 } as Plugin
 
 export {
-  Loader
+  CLoader
 }

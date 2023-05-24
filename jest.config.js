@@ -31,6 +31,6 @@ module.exports = {
   // set patterns to ignore for coverate (["/node_modules/"]) is the default value
   coveragePathIgnorePatterns: ['/node_modules/'],
   testEnvironmentOptions: {
-    customExportConditions: ["node", "node-addons"],
+    customExportConditions: ['node', 'node-addons'],
   },
 };

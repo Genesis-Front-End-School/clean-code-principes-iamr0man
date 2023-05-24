@@ -8,8 +8,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
-import { Container } from 'udewi-ui'
-import Lessons from '@/features/lesson/components/Lessons.vue';
+import { Container } from 'udewi-ui';
+import Lessons from '@/features/lesson/components/CourseLessons.vue';
 import CourseDetails from '@/features/course/components/CourseDetails.vue';
 import { courseGateway } from '@/infra/gateway/courses.gateway';
 

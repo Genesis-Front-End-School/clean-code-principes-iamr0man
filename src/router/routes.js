@@ -2,7 +2,7 @@ import HomeView from '@/features/home/view/HomeView.vue';
 import Course from '@/features/course/view/CourseView.vue';
 import PageNotFound from '@/features/page-not-found/view/PageNotFoundView.vue';
 
-export const routes = [
+export default [
   {
     path: '/',
     name: 'home',

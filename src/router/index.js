@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { routes } from '@/router/routes';
+import routes from '@/router/routes';
 import { authGateway } from '@/infra/gateway/auth.gateway';
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 });
 
 router.beforeEach(async (to, from, next) => {

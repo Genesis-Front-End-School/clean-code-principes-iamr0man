@@ -15,15 +15,16 @@
       :class="imagePreviewClasses"
       :src="previewImageLink"
       :alt="course.title"
-      class="rounded-t-lg h-[163px] object-contain mx-auto" />
+      class="rounded-t-lg h-[163px] object-contain mx-auto"
+    >
   </div>
 </template>
 
 <script lang="ts">
 import type { PropType } from 'vue';
 import { defineComponent, ref } from 'vue';
-import type { ICourse } from '@/features/home/types/ICourse.types';
 import Hls from 'hls.js';
+import type { ICourse } from '@/features/home/types/ICourse.types';
 
 export default defineComponent({
   props: {
@@ -34,11 +35,11 @@ export default defineComponent({
   },
   emits: ['paused'],
   setup() {
-    const activeVideo = ref<HTMLMediaElement | null>(null)
+    const activeVideo = ref<HTMLMediaElement | null>(null);
 
     return {
       activeVideo,
-    }
+    };
   },
   data: () => ({
     hls: new Hls(),
@@ -47,12 +48,12 @@ export default defineComponent({
   computed: {
     isAvailable() {
       return (
-        this.course.meta.courseVideoPreview &&
-        this.course.meta.courseVideoPreview.duration > 0
+        this.course.meta.courseVideoPreview
+        && this.course.meta.courseVideoPreview.duration > 0
       );
     },
     previewImageLink() {
-      return this.course.previewImageLink + '/cover.webp';
+      return `${this.course.previewImageLink}/cover.webp`;
     },
     videoClasses() {
       return { 'z-10': !this.paused };
@@ -76,7 +77,7 @@ export default defineComponent({
         return;
       }
 
-      this.paused = false
+      this.paused = false;
 
       const linkOriginal = this.course.meta.courseVideoPreview.link;
 
@@ -98,7 +99,7 @@ export default defineComponent({
       this.activeVideo.pause();
       this.activeVideo.currentTime = 0;
 
-      this.paused = true
+      this.paused = true;
     },
   },
 });

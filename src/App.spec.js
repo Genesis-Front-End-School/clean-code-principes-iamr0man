@@ -7,7 +7,7 @@ describe('App', () => {
       global: {
         stubs: {
           'router-view': false,
-        }
+        },
       },
     });
 

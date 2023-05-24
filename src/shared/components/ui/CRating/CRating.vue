@@ -29,8 +29,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
 
 type Size = 'small' | 'medium' | 'large' | string;
 type ImageSizes = { w: number; h: number };
@@ -62,11 +62,7 @@ export default defineComponent({
       type: String as PropType<string>,
       required: false,
       default: 'text-orange-600',
-      validator: (v: string) => {
-        const isValid = v.split('-')[0] === 'text';
-        if (!isValid) console.error('Color prop must begin with text- prefix');
-        return isValid;
-      },
+      validator: (v: string) => v.split('-')[0] === 'text',
     },
   },
 

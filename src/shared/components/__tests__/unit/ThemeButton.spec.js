@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import ThemeButton from '@/shared/components/ui/ThemeButton.vue';
+import ThemeButton from '@/shared/components/ui/ThemeButton/ThemeButton.vue';
 
 describe('ThemeButton', () => {
   it('should return dark theme by default', () => {
@@ -13,6 +13,7 @@ describe('ThemeButton', () => {
     const localStorageItems = { [colorThemeKey]: 'light' }
 
     jest.spyOn(Storage.prototype, 'getItem');
+    // @ts-ignore
     Storage.prototype.getItem = jest.fn().mockImplementationOnce(key => localStorageItems[key])
 
     const wrapper = shallowMount(ThemeButton);
@@ -34,6 +35,7 @@ describe('ThemeButton', () => {
     const localStorageItems = { [colorThemeKey]: 'light' }
 
     const setItem = jest.spyOn(Storage.prototype, 'setItem');
+    // @ts-ignore
     Storage.prototype.getItem = jest.fn().mockImplementationOnce(key => localStorageItems[key])
 
     const wrapper = shallowMount(ThemeButton);

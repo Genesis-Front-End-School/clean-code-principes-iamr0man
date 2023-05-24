@@ -123,7 +123,7 @@ export default defineComponent({
 
           videoElement.requestPictureInPicture();
         } catch(err) {
-          console.error(err);
+          console.log('There no possible way to show picture-in-picture mode');
         }
       }
     },
